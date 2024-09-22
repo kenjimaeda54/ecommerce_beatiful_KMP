@@ -1,0 +1,1474 @@
+scalar URL
+
+scalar BigInt
+
+type Query {
+  """
+  Query for Amazon product information
+  """
+  amazonProduct(input: AmazonProductInput!): AmazonProduct
+
+  """
+  Query for Amazon product search results
+  """
+  amazonProductSearchResults(input: AmazonProductSearchResultsInput!): AmazonProductSearchResults
+
+  """
+  Query for Amazon autocomplete results from the search bar
+  """
+  amazonSearchAutocompleteResults(input: AmazonSearchAutocompleteInput!): [AmazonSearchAutocompleteResult!]!
+
+  """
+  Query for root level Amazon product categories
+  """
+  amazonProductCategoryTaxonomy(input: AmazonProductCategoryTaxonomyInput): [AmazonProductCategory!]!
+
+  """
+  Query for an Amazon product category
+  """
+  amazonProductCategory(input: AmazonProductCategoryInput!): AmazonProductCategory
+
+  """
+  Query for an Amazon seller page (e.g. https://www.amazon.com/sp?ie=UTF8&seller=A2SFGDK0SQGMP8&asin=B093BRY83H)
+  """
+  amazonSeller(input: AmazonSellerInput!): AmazonSeller
+
+  """
+  Query for an Amazon author page (e.g. https://www.amazon.com/stores/Yevgeniy-Brikman/author/B017M7UJX6)
+  """
+  amazonAuthor(input: AmazonAuthorInput!): AmazonAuthor
+}
+
+input AmazonAuthorInput {
+  """
+  The domain for fetching author data, defaults to US
+  """
+  domain: AmazonDomain
+
+  """
+  The asin ID for the author (e.g. B017M7UJX6)
+  """
+  asin: String!
+}
+
+input AmazonSearchAutocompleteInput {
+  """
+  The domain for fetching autocomplete data, defaults to US
+  """
+  domain: AmazonDomain
+
+  """
+  The search term for fetching autocomplete results
+  """
+  searchTerm: String!
+
+  """
+  The search autocomplete_alias in the amazon url parameter
+  """
+  category: AmazonAutocompleteCategory
+}
+
+type AmazonSearchAutocompleteResult {
+  """
+  The search term suggested by autocomplete
+  """
+  suggestion: String!
+}
+
+enum AmazonAutocompleteCategory {
+  ALL_DEPARTMENTS
+
+  AUDIBLE_BOOKS_AND_ORIGINALS
+
+  ALEXA_SKILLS
+
+  AMAZON_DEVICES
+
+  AMAZON_FRESH
+
+  AMAZON_PHARMACY
+
+  AMAZON_WAREHOUSE
+
+  APPLIANCES
+
+  APPS_AND_GAMES
+
+  ARTS_CRAFTS_AND_SEWING
+
+  AUTOMOTIVE_PARTS_AND_ACCESSORIES
+
+  BABY
+
+  BEAUTY_AND_PERSONAL_CARE
+
+  BOOKS
+
+  CDS_AND_VINYL
+
+  CELL_PHONES_AND_ACCESSORIES
+
+  CLOTHING_SHOES_AND_JEWELRY
+
+  WOMEN
+
+  MEN
+
+  GIRLS
+
+  BOYS
+
+  BABY_FASHION
+
+  AMAZON_EXPLORE
+
+  COLLECTIBLES_AND_FINE_ART
+
+  COMPUTERS
+
+  COURSES
+
+  CREDIT_AND_PAYMENT_CARDS
+
+  DIGITAL_EDUCATIONAL_RESOURCES
+
+  DIGITAL_MUSIC
+
+  ELECTRONICS
+
+  GARDEN_AND_OUTDOOR
+
+  GIFT_CARDS
+
+  GROCERY_AND_GOURMET_FOOD
+
+  HANDMADE
+
+  HEALTH_HOUSEHOLD_AND_BABY_CARE
+
+  HOME_AND_BUSINESS_SERVICES
+
+  HOME_AND_KITCHEN
+
+  INDUSTRIAL_AND_SCIENTIFIC
+
+  JUST_FOR_PRIME
+
+  KINDLE_STORE
+
+  LUGGAGE_AND_TRAVEL_GEAR
+
+  MAGAZINE_SUBSCRIPTIONS
+
+  MOVIES_AND_TV
+
+  MUSICAL_INSTRUMENTS
+
+  OFFICE_PRODUCTS
+
+  PET_SUPPLIES
+
+  PREMIUM_BEAUTY
+
+  PRIME_VIDEO
+
+  SMART_HOME
+
+  SOFTWARE
+
+  SPORTS_AND_OUTDOORS
+
+  SUBSCRIPTION_BOXES
+
+  TOOLS_AND_HOME_IMPROVEMENT
+
+  TOYS_AND_GAMES
+
+  UNDER_10
+
+  VEHICLES
+
+  VIDEO_GAMES
+
+  WHOLE_FOODS_MARKET
+}
+
+"""
+The input type for `amazonSeller`
+"""
+input AmazonSellerInput {
+  """
+  The domain for fetching product data, defaults to US
+  """
+  domain: AmazonDomain
+
+  """
+  The seller ID for a product (e.g. B01HY0JA3G)
+  """
+  sellerId: String!
+}
+
+"""
+An Amazon Seller and store front
+"""
+type AmazonSeller {
+  """
+  The ID of the seller (e.g. A34JY1ZNKUG942)
+  """
+  sellerId: String!
+
+  """
+  The name of the seller
+  """
+  name: String
+
+  """
+  The url of the logo
+  """
+  logoUrl: URL
+
+  """
+  The phone number of the seller, if available
+  """
+  phone: String
+
+  """
+  The rating of the seller, if available
+  """
+  rating: Float
+
+  """
+  The About information for the seller, if available
+  """
+  about: String
+
+  """
+  The product results for the seller, if available
+  """
+  productResults(input: AmazonSellerProductResultsInput): AmazonProductResultsPage
+}
+
+input AmazonSellerProductResultsInput {
+  """
+  The page number requested for product results
+  """
+  page: BigInt
+}
+
+"""
+The input type for `amazonProductCategoryTaxonomy`
+"""
+input AmazonProductCategoryTaxonomyInput {
+  """
+  The domain for fetching product category taxonomy, defaults to US
+  """
+  domain: AmazonDomain
+}
+
+"""
+The input object for retrieving search results
+"""
+input AmazonProductSearchResultsInput {
+  """
+  The domain for fetching search results data, defaults to US
+  """
+  domain: AmazonDomain
+
+  """
+  The search term for fetching search results
+  """
+  searchTerm: String!
+
+  """
+  An optional category ID used to filter search results, typically a number but may also be a string in certain cases (e.g. `amazonfresh`)
+  """
+  categoryId: String
+
+  """
+  Optional refinements to apply to search results (also commonly called 'filters').
+  """
+  refinements: AmazonProductSearchRefinements
+}
+
+"""
+Refinements available on a search results page. These are filters that can be applied to the search results.
+"""
+input AmazonProductSearchRefinements {
+  """
+  Condition is a commonly available and used refinement option.
+  If the search result page does not support this option it will be ignored.
+  """
+  conditions: [AmazonProductCondition]
+
+  priceRange: PriceRange
+
+  """
+  Other refinements to apply to search results. Available refinements can be
+  discovered by inspecting the `availableRefinements` field on `AmazonProductSearchResults`."
+  """
+  other: [AmazonProductSearchRefinementPair!]
+}
+
+input PriceRange {
+  min: Float
+
+  max: Float
+}
+
+enum AmazonProductCondition {
+  NEW
+
+  USED
+
+  RENEWED
+}
+
+input AmazonProductSearchRefinementPair {
+  """
+  The name of the refinement
+  """
+  name: String!
+
+  """
+  The values to apply to the refinements.
+  """
+  values: [String!]
+}
+
+"""
+The input object for retrieving product category information.
+"""
+input AmazonProductCategoryInput {
+  """
+  The domain for fetching product category data, defaults to US
+  """
+  domain: AmazonDomain
+
+  """
+  The category ID, typically a number but may also be a string in certain cases (e.g. `amazonfresh`)
+  """
+  categoryId: String!
+}
+
+"""
+A page of product results.
+"""
+type AmazonProductResultsPage {
+  """
+  A list of AmazonProducts from the current page
+  """
+  results: [AmazonProduct]
+
+  """
+  Metadata about the current page
+  """
+  pageInfo: AmazonPageInfo
+}
+
+"""
+The available options for sorting AmazonProductCategory results.
+"""
+enum AmazonProductResultsSort {
+  """
+  The default option to sort by featured items first
+  """
+  FEATURED
+
+  """
+  Sort by most recent product arrivals to the category
+  """
+  MOST_RECENT
+
+  """
+  Sort from lowest price to highest price
+  """
+  PRICE_ASCENDING
+
+  """
+  Sort from highest price to lowest price
+  """
+  PRICE_DESCENDING
+
+  """
+  Sorts by average customer review
+  """
+  AVERAGE_CUSTOMER_REVIEW
+}
+
+"""
+Either `asinLookup`, `urlLookup`, or `gtinLookup` is required.
+"""
+input AmazonProductInput {
+  asinLookup: AmazonProductAsinLookup
+
+  gtinLookup: AmazonProductGtinLookup
+
+  urlLookup: AmazonProductUrlLookup
+
+  """
+  The domain for fetching product data, defaults to US
+  """
+  domain: AmazonDomain @deprecated(reason: "No longer supported")
+
+  """
+  The ASIN for a product (e.g. B01HY0JA3G)
+  """
+  asin: String @deprecated(reason: "No longer supported")
+
+  """
+  The Amazon URL for a product
+
+  ([Example](https://www.amazon.com/Dropps-Sensitive-Laundry-Detergent-Scent/dp/B01HY0JA3G/))
+  """
+  url: URL @deprecated(reason: "No longer supported")
+}
+
+"""
+For use when looking up Amazon Product by ASIN.
+"""
+input AmazonProductAsinLookup {
+  """
+  The domain for fetching product data, defaults to US
+  """
+  domain: AmazonDomain
+
+  """
+  The ASIN for a product (e.g. B01HY0JA3G)
+  """
+  asin: String!
+}
+
+"""
+For use when looking up Amazon Product by GTIN.
+"""
+input AmazonProductGtinLookup {
+  """
+  The domain for fetching product data, defaults to US
+  """
+  domain: AmazonDomain
+
+  """
+  The GTIN (ISBN, UPC or EAN code) for a product.
+  """
+  gtin: String!
+}
+
+"""
+For use when looking up Amazon Product by URL.
+"""
+input AmazonProductUrlLookup {
+  """
+  The Amazon URL for a product
+
+  ([Example](https://www.amazon.com/Dropps-Sensitive-Laundry-Detergent-Scent/dp/B01HY0JA3G/))
+  """
+  url: String!
+}
+
+"""
+Supported Amazon Domains (e.g. amazon.com, amazon.co.uk)
+"""
+enum AmazonDomain {
+  """
+  The Amazon.com.au domain used by customers in Australia
+  """
+  AU
+
+  """
+  The Amazon.ca domain used by customers in Canada
+  """
+  CA
+
+  """
+  The amazon.de domain for customers in Germany
+  """
+  DE
+
+  """
+  The amazon.com domain used by customers in the United States
+  """
+  US
+
+  """
+  The amazon.co.uk domain used by customers in the United States
+  """
+  UK
+
+  """
+  The amazon.fr domain used by customers in France
+  """
+  FR
+
+  """
+  The amazon.it domain used by customers in Italy
+  """
+  IT
+}
+
+"""
+Details about the product from Amazon. Most of the information
+provided can be found on the Amazon product page
+
+([Example](https://www.amazon.com/Dropps-Sensitive-Laundry-Detergent-Scent/dp/B01HY0JA3G/))
+"""
+type AmazonProduct {
+  """
+  The title of the product as displayed on Amazon
+  """
+  title: String!
+
+  """
+  The description of the product as displayed on Amazon, for books.
+  """
+  bookDescription: String
+
+  """
+  A title optimized to be more user-friendly, by removing SEO words and extra text.
+
+  Note: This feature counts as an additional request for usage billing.
+  """
+  optimizedTitle: String
+
+  """
+  A description optimized to be more user-friendly, by removing SEO words and extra text.
+
+  Note: This feature counts as an additional request for usage billing.
+  """
+  optimizedDescription: String
+
+  """
+  The subtitle of the product as displayed on Amazon
+  """
+  subtitle: String
+
+  """
+  The brand of the product as displayed on Amazon
+  """
+  brand: String
+
+  """
+  The coupon for the product, if one is available. 
+  """
+  coupon: AmazonProductCoupon
+
+  """
+  The country of origin for the product, from technical specifications (if available).
+  """
+  countryOfOrigin: String
+
+  """
+  The Feature Bullets are the items found in the About this item section on the Amazon product page.
+  """
+  featureBullets: [String]
+
+  """
+  The URL of the product on Amazon
+  ([Example](https://www.amazon.com/Dropps-Sensitive-Laundry-Detergent-Scent/dp/B01HY0JA3G/))
+  """
+  url: URL!
+
+  """
+  The ASIN of the parent product on Amazon, if available
+  """
+  asin: String
+
+  """
+  The authors for the product, if available (typically for books, music, and video)
+  """
+  authors: [AmazonAuthor]
+
+  """
+  A flag indicating if the product is Prime eligible for the Buy Box offer.
+  """
+  isPrime: Boolean!
+
+  """
+  A flag indicating if the product is available in New condition for the Buy Box offer.
+  """
+  isNew: Boolean!
+
+  packageWeight: String
+
+  """
+  The price of the product for the [Featured Offer](https://sellercentral.amazon.com/help/hub/reference/external/G37911) (AKA the Buy Box)
+  The price may be unavailable in certain cases (e.g. if the product is currently unavailable).
+  """
+  price: AmazonProductPrice
+
+  """
+  The seller for the for the [Featured Offer](https://sellercentral.amazon.com/help/hub/reference/external/G37911) (AKA the Buy Box).
+  This may be unavailable in certain cases (e.g. the product is sold by Amazon).
+  """
+  seller: AmazonSeller
+
+  """
+  The categories for a product on Amazon
+  """
+  categories: [AmazonProductCategory]
+
+  """
+  The Best Sellers Ranks as found in product details on a product page on Amazon
+  """
+  bestSellerRankings: [AmazonBestsellerRanking]
+
+  """
+  The main image url for a product on Amazon
+  """
+  mainImageUrl: URL
+
+  """
+  Other images available for a product on Amazon (excludes the image from mainImageUrl)
+  """
+  imageUrls: [URL]
+
+  """
+  The aggregate star rating for the product
+  """
+  rating: Float
+
+  """
+  The total number of ratings for the product. This number includes ratings with and without a review
+  """
+  ratingsTotal: BigInt
+
+  """
+  A breakdown of the number of ratings by number of stars
+  """
+  ratingsBreakdown: AmazonRatingsBreakdown
+
+  """
+  The total number of reviews for a product.
+  """
+  reviewsTotal: BigInt
+
+  """
+  Fetch on or more pages of review results.
+  """
+  reviewsPaginated(input: AmazonProductReviewsInput): AmazonProductReviewsPage
+
+  """
+  Sales estimations for the product. Will return `null` if estimates are unavailable. Note: This feature counts as an additional request for usage billing (1 request per product).
+  """
+  salesEstimate: AmazonProductSalesEstimate
+
+  """
+  Stock estimations for the product. Will return `null` if estimate is unavailable or requires login. Note: This feature counts as an additional request for usage billing (1 request per product).
+  """
+  stockEstimate: AmazonProductStockEstimate
+
+  """
+  The subscribe and save discount percentage for the product, if available (i.e. 0-100).
+  """
+  subscribeAndSaveDiscountPercentage: Float
+
+  """
+  The subscribe and save discount price for the product, if available.
+  """
+  subscribeAndSaveDiscountPrice: AmazonProductPrice
+
+  """
+  The subscribe and save maximum discount for the product, if available (i.e. 0-100).
+  """
+  subscribeAndSaveMaximumDiscountPercentage: Float
+
+  """
+  The subscribe and save maximum discount price for the product, if available.
+  """
+  subscribeAndSaveMaximumDiscountPrice: AmazonProductPrice
+
+  """
+  The technical specs of the product, if available
+  """
+  technicalSpecifications: [AmazonProductTechnicalSpecification]
+
+  """
+  Videos for the product, if available
+  """
+  videos: [AmazonProductVideo]
+
+  """
+  Videos from the "Videos for this product" section on the product details page, if available
+  """
+  videosForThisProduct: [AmazonProductVideo]
+
+  """
+  Videos from the "Videos for related products" section on the product details page, if available
+  """
+  videosForRelatedProducts: [AmazonProductVideo]
+}
+
+type AmazonProductTechnicalSpecification {
+  """
+  The name of the technical specification
+  """
+  name: String
+
+  """
+  The value of the technical specification
+  """
+  value: String
+}
+
+type AmazonProductVideo {
+  """
+  The title of the video.
+  """
+  title: String!
+
+  """
+  The image URL for the thumbnail. Typically a PNG.
+  """
+  thumbnailImageUrl: URL
+
+  """
+  The URL for the video source.
+  """
+  url: URL
+}
+
+"""
+A coupon for an AmazonProduct.
+"""
+type AmazonProductCoupon {
+  """
+  The text for coupon (e.g. 'Save 20%')
+  """
+  label: String!
+}
+
+"""
+Stock levels and other availability data for the product for a given offer.
+"""
+type AmazonProductStockEstimate {
+  """
+  The offer ID associated with the stock estimate
+  """
+  offerId: String
+
+  """
+  Whether or not the product is in stock
+  """
+  inStock: Boolean!
+
+  """
+  The number of items in stock
+  """
+  stockLevel: Int
+
+  """
+  Indicates the shipping times for the product
+  """
+  availabilityMessage: String
+}
+
+"""
+Weekly, monthly, and annual sales estimates for the product.
+"""
+type AmazonProductSalesEstimate {
+  """
+  The estimated weekly sales for the product
+  """
+  weeklyUnitSales: Int
+
+  """
+  The estimated monthly sales for the product
+  """
+  monthlyUnitSales: Int
+
+  """
+  The estimated annual sales for the product
+  """
+  annualUnitSales: Int
+}
+
+"""
+The price for the Amazon Product or Variant
+"""
+type AmazonProductPrice {
+  """
+  The currency symbol
+  """
+  symbol: String!
+
+  """
+  The numeric value of the price
+  """
+  value: Float!
+
+  """
+  The currency for the given price
+  """
+  currency: String!
+
+  """
+  The price string as displayed on Amazon (e.g. $10.99)
+  """
+  display: String!
+}
+
+"""
+A page of reviews usually contains 10 results.
+Amazon typically limits the number of reviews on site to 500.
+"""
+type AmazonProductReviewsPage {
+  """
+  A list of AmazonProductReview from the current page
+  """
+  reviews: [AmazonProductReview]
+
+  """
+  Metadata about the current page
+  """
+  pageInfo: AmazonPageInfo
+}
+
+"""
+Metadata to help with reviews pagination.
+"""
+type AmazonPageInfo {
+  """
+  The current page of results
+  """
+  currentPage: BigInt
+
+  """
+  The total number of pages of results
+  """
+  totalPages: BigInt
+
+  """
+  An indicator if the next page of results is available
+  """
+  hasNextPage: Boolean
+
+  """
+  An indicator if a previous page of results is available
+  """
+  hasPrevPage: Boolean
+}
+
+"""
+A product review for an Amazon product
+"""
+type AmazonProductReview {
+  """
+  The id for the `AmazonProductReview` (e.g. R1BHMF95GVJSTO)
+  """
+  id: String
+
+  """
+  The title of the `AmazonProductReview`
+  """
+  title: String
+
+  """
+  The body of the `AmazonProductReview` as plain text (no html)
+  """
+  body: String
+
+  """
+  The image URLs for the `AmazonProductReview`, if available
+  """
+  imageUrls: [URL]
+
+  """
+  The `AmazonProductReviewVideo`s for the `AmazonProductReview`, if available
+  """
+  videos: [AmazonProductReviewVideo]
+
+  """
+  The rating for the review, between 1 and 5 stars.
+  """
+  rating: Int
+
+  """
+  The number of helpful votes for the review
+  """
+  helpfulVotes: BigInt
+
+  """
+  An indication if the review was purchased by a purchaser verified by Amazon
+  """
+  verifiedPurchase: Boolean
+
+  """
+  The reviewer who authored the product review. 
+  """
+  reviewer: AmazonProductReviewer
+}
+
+type AmazonProductReviewer {
+  id: String
+
+  name: String
+
+  url: URL
+}
+
+"""
+A video attached to an AmazonProductReview
+"""
+type AmazonProductReviewVideo {
+  """
+  The image URL for the [poster](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#attr-poster)
+  image, typically displayed while the video is loading the first frame.
+  """
+  posterImageUrl: URL
+
+  """
+  The URL for the video source.
+  """
+  url: URL
+}
+
+"""
+Inputs to fetch product reviews.
+"""
+input AmazonProductReviewsInput {
+  """
+  The page requested for product reviews
+  """
+  page: BigInt
+
+  """
+  Optionally filter for reviews from purchasers verified by Amazon
+  """
+  onlyVerifiedReviews: Boolean
+
+  """
+  Filter by ratings, by default will include ALL reviews.
+  """
+  rating: AmazonProductReviewRatingOption
+
+  """
+  Filter reviews by search term.
+  """
+  search: String
+}
+
+enum AmazonProductReviewRatingOption {
+  """
+  Include all reviews.
+  """
+  ALL
+
+  """
+  Include all five star reviews.
+  """
+  FIVE_STAR
+
+  """
+  Include all four star reviews.
+  """
+  FOUR_STAR
+
+  """
+  Include all three star reviews.
+  """
+  THREE_STAR
+
+  """
+  Include all two star reviews.
+  """
+  TWO_STAR
+
+  """
+  Include all one star reviews.
+  """
+  ONE_STAR
+
+  """
+  Include all positive reviews.
+  """
+  ALL_POSITIVE
+
+  """
+  Include all critical reviews.
+  """
+  ALL_CRITICAL
+}
+
+"""
+A breakdown of the number of reviews by each rating 1-5 stars.
+"""
+type AmazonRatingsBreakdown {
+  """
+  The total number of one star reviews
+  """
+  oneStarRatingsCount: BigInt
+
+  """
+  The total number of two star reviews
+  """
+  twoStarRatingsCount: BigInt
+
+  """
+  The total number of three star reviews
+  """
+  threeStarRatingsCount: BigInt
+
+  """
+  The total number of four star reviews
+  """
+  fourStarRatingsCount: BigInt
+
+  """
+  The total number of five star reviews
+  """
+  fiveStarRatingsCount: BigInt
+}
+
+"""
+The dimensions of the Amazon Product, types of dimensions vary by type of product
+"""
+type AmazonProductDimensions {
+  name: String
+
+  value: String
+}
+
+"""
+The category on Amazon
+"""
+type AmazonProductCategory {
+  """
+  The Amazon ID for a category. In the example URL this is identified by the `node` parameter.
+
+  ([Example]https://www.amazon.com/health-personal-care-nutrition-fitness/b/?node=3760901))
+  """
+  id: String
+
+  """
+  The name of the category
+  """
+  name: String
+
+  """
+  The Amazon URL for a category page
+
+  ([Example]https://www.amazon.com/health-personal-care-nutrition-fitness/b/?node=3760901))
+  """
+  url: URL
+
+  """
+  The breadcrumb path for a category.
+
+  Example: Clothing, Shoes & Jewelry › Men › Clothing › Shirts
+  """
+  breadcrumbPath: String
+
+  """
+  Product results shown on the category listing page.
+
+  If `input` is not provided, will default to first page with default sort.
+
+  Certain higher level category pages will have no product results and may require drilling down into lower level categories to find product results.
+  """
+  productResults(input: AmazonProductCategoryProductResultsInput): AmazonProductResultsPage
+
+  """
+  Subcategories of the current category in the Amazon taxonomy
+  """
+  subcategories: [AmazonProductCategory!]
+}
+
+"""
+An Amazon Search Results page.
+"""
+type AmazonProductSearchResults {
+  """
+  Refinements available on a search results page. These are filters that can be applied to the search results.
+  """
+  availableRefinements: [AmazonProductSearchRefinement]
+
+  """
+  Product results shown on the search results page.
+
+  If `input` is not provided, will default to first page with default sort.
+  """
+  productResults(input: AmazonProductSearchResultsProductResultsInput): AmazonProductResultsPage
+}
+
+type AmazonProductSearchRefinement {
+  """
+  The name of the refinement
+  """
+  name: String
+
+  """
+  The available options for the refinement
+  """
+  options: [AmazonProductSearchRefinementOption]
+}
+
+type AmazonProductSearchRefinementOption {
+  """
+  The name of the refinement option
+  """
+  name: String
+}
+
+input AmazonProductSearchResultsProductResultsInput {
+  """
+  The page number requested for product results
+  """
+  page: BigInt
+
+  """
+  The sort for the product results on the search results page
+  """
+  sort: AmazonProductResultsSort
+}
+
+input AmazonProductCategoryProductResultsInput {
+  """
+  The page number requested for product results
+  """
+  page: BigInt
+
+  """
+  The sort for the product results on the category page
+  """
+  sort: AmazonProductResultsSort
+}
+
+"""
+Best seller ranking by category
+"""
+type AmazonBestsellerRanking {
+  """
+  The category name for this ranking
+  """
+  categoryName: String!
+
+  """
+  The rank for this product for this category
+  """
+  rank: Int!
+}
+
+type AmazonAuthor {
+  name: String
+
+  url: URL
+
+  imageUrl: URL
+
+  biography: String
+
+  bookResults(input: AmazonAuthorBookResultsInput): AmazonProductResultsPage
+}
+
+input AmazonAuthorBookResultsInput {
+  """
+  The page number requested for product results
+  """
+  page: BigInt
+}
+
+"""
+A GraphQL Schema defines the capabilities of a GraphQL server. It exposes all available types and directives on the server, as well as the entry points for query, mutation, and subscription operations.
+"""
+type __Schema {
+  description: String
+
+  """
+  A list of all types supported by this server.
+  """
+  types: [__Type!]!
+
+  """
+  The type that query operations will be rooted at.
+  """
+  queryType: __Type!
+
+  """
+  If this server supports mutation, the type that mutation operations will be rooted at.
+  """
+  mutationType: __Type
+
+  """
+  If this server support subscription, the type that subscription operations will be rooted at.
+  """
+  subscriptionType: __Type
+
+  """
+  A list of all directives supported by this server.
+  """
+  directives: [__Directive!]!
+}
+
+"""
+The fundamental unit of any GraphQL Schema is the type. There are many kinds of types in GraphQL as represented by the `__TypeKind` enum.
+
+Depending on the kind of a type, certain fields describe information about that type. Scalar types provide no information beyond a name, description and optional `specifiedByURL`, while Enum types provide their values. Object and Interface types provide the fields they describe. Abstract types, Union and Interface, provide the Object types possible at runtime. List and NonNull types compose other types.
+"""
+type __Type {
+  kind: __TypeKind!
+
+  name: String
+
+  description: String
+
+  specifiedByURL: String
+
+  fields(includeDeprecated: Boolean = false): [__Field!]
+
+  interfaces: [__Type!]
+
+  possibleTypes: [__Type!]
+
+  enumValues(includeDeprecated: Boolean = false): [__EnumValue!]
+
+  inputFields(includeDeprecated: Boolean = false): [__InputValue!]
+
+  ofType: __Type
+
+  isOneOf: Boolean
+}
+
+"""
+An enum describing what kind of type a given `__Type` is.
+"""
+enum __TypeKind {
+  """
+  Indicates this type is a scalar.
+  """
+  SCALAR
+
+  """
+  Indicates this type is an object. `fields` and `interfaces` are valid fields.
+  """
+  OBJECT
+
+  """
+  Indicates this type is an interface. `fields`, `interfaces`, and `possibleTypes` are valid fields.
+  """
+  INTERFACE
+
+  """
+  Indicates this type is a union. `possibleTypes` is a valid field.
+  """
+  UNION
+
+  """
+  Indicates this type is an enum. `enumValues` is a valid field.
+  """
+  ENUM
+
+  """
+  Indicates this type is an input object. `inputFields` is a valid field.
+  """
+  INPUT_OBJECT
+
+  """
+  Indicates this type is a list. `ofType` is a valid field.
+  """
+  LIST
+
+  """
+  Indicates this type is a non-null. `ofType` is a valid field.
+  """
+  NON_NULL
+}
+
+"""
+Object and Interface types are described by a list of Fields, each of which has a name, potentially a list of arguments, and a return type.
+"""
+type __Field {
+  name: String!
+
+  description: String
+
+  args(includeDeprecated: Boolean = false): [__InputValue!]!
+
+  type: __Type!
+
+  isDeprecated: Boolean!
+
+  deprecationReason: String
+}
+
+"""
+Arguments provided to Fields or Directives and the input fields of an InputObject are represented as Input Values which describe their type and optionally a default value.
+"""
+type __InputValue {
+  name: String!
+
+  description: String
+
+  type: __Type!
+
+  """
+  A GraphQL-formatted string representing the default value for this input value.
+  """
+  defaultValue: String
+
+  isDeprecated: Boolean!
+
+  deprecationReason: String
+}
+
+"""
+One possible value for a given Enum. Enum values are unique values, not a placeholder for a string or numeric value. However an Enum value is returned in a JSON response as a string.
+"""
+type __EnumValue {
+  name: String!
+
+  description: String
+
+  isDeprecated: Boolean!
+
+  deprecationReason: String
+}
+
+"""
+A Directive provides a way to describe alternate runtime execution and type validation behavior in a GraphQL document.
+
+In some cases, you need to provide options to alter GraphQL's execution behavior in ways field arguments will not suffice, such as conditionally including or skipping a field. Directives provide this by describing additional information to the executor.
+"""
+type __Directive {
+  name: String!
+
+  description: String
+
+  isRepeatable: Boolean!
+
+  locations: [__DirectiveLocation!]!
+
+  args(includeDeprecated: Boolean = false): [__InputValue!]!
+}
+
+"""
+A Directive can be adjacent to many parts of the GraphQL language, a __DirectiveLocation describes one such possible adjacencies.
+"""
+enum __DirectiveLocation {
+  """
+  Location adjacent to a query operation.
+  """
+  QUERY
+
+  """
+  Location adjacent to a mutation operation.
+  """
+  MUTATION
+
+  """
+  Location adjacent to a subscription operation.
+  """
+  SUBSCRIPTION
+
+  """
+  Location adjacent to a field.
+  """
+  FIELD
+
+  """
+  Location adjacent to a fragment definition.
+  """
+  FRAGMENT_DEFINITION
+
+  """
+  Location adjacent to a fragment spread.
+  """
+  FRAGMENT_SPREAD
+
+  """
+  Location adjacent to an inline fragment.
+  """
+  INLINE_FRAGMENT
+
+  """
+  Location adjacent to a variable definition.
+  """
+  VARIABLE_DEFINITION
+
+  """
+  Location adjacent to a schema definition.
+  """
+  SCHEMA
+
+  """
+  Location adjacent to a scalar definition.
+  """
+  SCALAR
+
+  """
+  Location adjacent to an object type definition.
+  """
+  OBJECT
+
+  """
+  Location adjacent to a field definition.
+  """
+  FIELD_DEFINITION
+
+  """
+  Location adjacent to an argument definition.
+  """
+  ARGUMENT_DEFINITION
+
+  """
+  Location adjacent to an interface definition.
+  """
+  INTERFACE
+
+  """
+  Location adjacent to a union definition.
+  """
+  UNION
+
+  """
+  Location adjacent to an enum definition.
+  """
+  ENUM
+
+  """
+  Location adjacent to an enum value definition.
+  """
+  ENUM_VALUE
+
+  """
+  Location adjacent to an input object type definition.
+  """
+  INPUT_OBJECT
+
+  """
+  Location adjacent to an input object field definition.
+  """
+  INPUT_FIELD_DEFINITION
+}
+
+"""
+Indicates that a field is deprecated and should no longer be used. Will be removed in the future.
+"""
+directive @deprecated (reason: String = "No longer supported") on FIELD_DEFINITION|ARGUMENT_DEFINITION|INPUT_FIELD_DEFINITION|ENUM_VALUE
+
+"""
+Indicates that a field is experimental and may have a higher rate of errors, timeouts, or data availability issues.
+"""
+directive @experimental on FIELD_DEFINITION
+
+"""
+Directs the executor to include this field or fragment only when the `if` argument is true.
+"""
+directive @include ("Included when true." if: Boolean!) on FIELD|FRAGMENT_SPREAD|INLINE_FRAGMENT
+
+"""
+Directs the executor to skip this field or fragment when the `if` argument is true.
+"""
+directive @skip ("Skipped when true." if: Boolean!) on FIELD|FRAGMENT_SPREAD|INLINE_FRAGMENT
+
+"""
+Exposes a URL that specifies the behavior of this scalar.
+"""
+directive @specifiedBy ("The URL that specifies the behavior of this scalar." url: String!) on SCALAR
+
+"""
+Indicates exactly one field must be supplied and this field must not be `null`.
+"""
+directive @oneOf on INPUT_OBJECT
+
+schema {
+  query: Query
+}

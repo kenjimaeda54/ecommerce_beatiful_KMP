@@ -1,16 +1,16 @@
 [versions]
 agp = "8.5.1"
 kotlin = "2.0.0"
-compose = "1.5.4"
+compose = "1.7.0-rc01"
 compose-material3 = "1.1.2"
-androidx-activityCompose = "1.8.0"
+androidx-activityCompose = "1.9.1"
 
 #version add
 viewModel-ktx = "2.8.4"
 coroutines-ktx = "1.8.1"
 koin =  "3.5.6"
 touchlab-skia = "0.8.3"
-
+apollo = "4.0.0"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -24,10 +24,10 @@ compose-material3 = { module = "androidx.compose.material3:material3", version.r
 # library add
 viewModel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "viewModel-ktx" }
 coroutines-ktx = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "coroutines-ktx" }
-androidx-lifecycle-viewmodel-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-android", version.ref = "viewModel-ktx" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+koin-androidx-core = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
-
+apollo-runtime = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "apollo"}
 
 
 [plugins]
@@ -38,6 +38,8 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
+
 # plugin add
 touchlab-skie = { id = "co.touchlab.skie", version.ref = "touchlab-skia" }
+apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
 

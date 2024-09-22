@@ -3,6 +3,9 @@ plugins {
     alias(libs.plugins.androidLibrary)
     //touchlab para view model
     alias(libs.plugins.touchlab.skie)
+
+    //apolo
+    alias(libs.plugins.apollo)
 }
 
 kotlin {
@@ -29,6 +32,7 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.coroutines.ktx)
             implementation(libs.koin.core)
+            implementation(libs.apollo.runtime)
         }
 
         iosMain.dependencies {
@@ -55,5 +59,17 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+apollo {
+    service("service") {
+        packageName.set("com.ecommerce.beatiful")
+        introspection {
+            endpointUrl.set("https://graphql.canopyapi.co/")
+            headers.set(mapOf("API-KEY" to "6385f7dd-ffa3-488f-b024-1b2af735bec5"))
+            schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
+            generateInputBuilders.set(true)
+        }
     }
 }

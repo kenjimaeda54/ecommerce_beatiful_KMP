@@ -1,0 +1,21 @@
+query amazonProduct($searchTherm: String!) {
+    amazonProductSearchResults(input: {searchTerm: $searchTherm}) {
+        productResults(input: {page: "1"}) {
+            results {
+                imageUrls
+                rating
+                price {
+                    currency
+                    value
+                    display
+                    symbol
+                }
+                title
+                url
+                brand
+                bookDescription
+                asin
+            }
+        }
+    }
+}
