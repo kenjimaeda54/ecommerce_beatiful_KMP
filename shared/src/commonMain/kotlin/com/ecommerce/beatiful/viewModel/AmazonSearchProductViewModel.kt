@@ -16,9 +16,9 @@ class AmazonSearchProductViewModel: CoroutineViewModel(), KoinComponent {
     private  var _amazonSearchProduct = MutableStateFlow<AmazonProductQuery.Data?>(null)
     val  amazonSearchProduct: StateFlow<AmazonProductQuery.Data?> = _amazonSearchProduct
 
-    fun fetchAmazonResult(product: String) {
+    fun fetchAmazonResult(product: String,differenceMinutes: Int) {
         scope.launch {
-            _amazonSearchProduct.value = amazonSearchProductRepository.fetchAmazonResult(product)
+            _amazonSearchProduct.value = amazonSearchProductRepository.fetchAmazonResult(product,differenceMinutes)
         }
 
    }

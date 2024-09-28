@@ -1,0 +1,20 @@
+import kotlin.collections.List;
+
+CREATE TABLE AmazonSearchProductData (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    createdAt INTEGER NOT NULL,
+    resultAmazon TEXT
+);
+
+
+
+insertAmazonProduct:
+INSERT  OR REPLACE INTO AmazonSearchProductData(createdAt, resultAmazon)
+VALUES ( ?,?);
+
+getAmazonProductData:
+SELECT * FROM AmazonSearchProductData;
+
+deleteAmazonProductData:
+DELETE FROM AmazonSearchProductData;
+

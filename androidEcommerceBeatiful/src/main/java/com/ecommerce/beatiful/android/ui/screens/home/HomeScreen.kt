@@ -18,7 +18,7 @@ fun HomeScreen() {
 
     ComposableLifecycle { _, event ->
         if (event == Lifecycle.Event.ON_START) {
-            viewModel.fetchAmazonResult(product = "phone")
+            viewModel.fetchAmazonResult(product = "phone", differenceMinutes = 1)
         }
 
     }

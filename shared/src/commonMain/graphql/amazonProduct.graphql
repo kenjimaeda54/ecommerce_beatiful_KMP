@@ -1,20 +1,21 @@
-query amazonProduct($searchTherm: String!) {
-    amazonProductSearchResults(input: {searchTerm: $searchTherm}) {
-        productResults(input: {page: "1"}) {
+query amazonProduct($searchTerm: String!) {
+    amazonProductSearchResults(input: {searchTerm: $searchTerm}) {
+        productResults {
             results {
                 imageUrls
                 rating
                 price {
-                    currency
-                    value
                     display
-                    symbol
                 }
                 title
                 url
                 brand
-                bookDescription
                 asin
+                seller {
+                    logoUrl
+                    name
+                    rating
+                }
             }
         }
     }

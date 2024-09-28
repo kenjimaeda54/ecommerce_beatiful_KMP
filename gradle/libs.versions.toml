@@ -1,6 +1,6 @@
 [versions]
 agp = "8.5.1"
-kotlin = "2.0.0"
+kotlin = "2.0.10"
 compose = "1.7.0-rc01"
 compose-material3 = "1.1.2"
 androidx-activityCompose = "1.9.1"
@@ -9,8 +9,13 @@ androidx-activityCompose = "1.9.1"
 viewModel-ktx = "2.8.4"
 coroutines-ktx = "1.8.1"
 koin =  "3.5.6"
-touchlab-skia = "0.8.3"
+touchlab-skia = "0.8.4"
 apollo = "4.0.0"
+datetime = "0.6.1"
+sqdelight = "2.0.2"
+serialization = "1.9.20"
+serialization-lib = "1.7.1"
+
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -28,6 +33,11 @@ koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
 koin-androidx-core = { module = "io.insert-koin:koin-androidx-compose", version.ref = "koin" }
 koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
 apollo-runtime = { module = "com.apollographql.apollo:apollo-runtime", version.ref = "apollo"}
+datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
+sql-android-driver = { module = "app.cash.sqldelight:android-driver", version.ref = "sqdelight" }
+sql-native-driver = { module = "app.cash.sqldelight:native-driver", version.ref = "sqdelight" }
+sql-coroutines-extensions = { module = "app.cash.sqldelight:coroutines-extensions", version.ref = "sqdelight" }
+kotlinx-serialization = { module =  "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization-lib" }
 
 
 [plugins]
@@ -38,8 +48,8 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
-
 # plugin add
 touchlab-skie = { id = "co.touchlab.skie", version.ref = "touchlab-skia" }
 apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
-
+sqdelight = { id = "app.cash.sqldelight", version.ref = "sqdelight" }
+serialization = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization"}
