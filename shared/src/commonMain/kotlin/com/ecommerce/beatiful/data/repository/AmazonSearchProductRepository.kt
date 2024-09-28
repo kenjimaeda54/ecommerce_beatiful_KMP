@@ -1,9 +1,12 @@
 package com.ecommerce.beatiful.data.repository
 
+import com.apollographql.apollo.exception.ApolloException
 import com.ecommerce.beatiful.AmazonProductQuery
 import com.ecommerce.beatiful.data.client.AmazonProductClient
 import com.ecommerce.beatiful.data.local.AmazonProductSearchResource
+import com.ecommerce.beatiful.data.model.AmazonResultSerialization
 import com.ecommerce.beatiful.data.model.toAmazonProductResult
+import com.ecommerce.beatiful.util.DataOrException
 import com.ecommerce.beatiful.util.Helpers
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -15,17 +18,19 @@ class AmazonSearchProductRepository : KoinComponent {
     suspend fun fetchAmazonResult(
         product: String,
         differenceMinutes: Int
-    ): AmazonProductQuery.Data? {
+    ): DataOrException<List<AmazonResultSerialization>, ApolloException,Boolean> {
         val helper = Helpers()
         val amazonData = resource.getAmazonProductSearchData()
 
         if (amazonData == null) {
-            val data = client.fetchAmazonResult(product)
+            val response = client.fetchAmazonResult(product)
+            val data = response.data
             if (data != null) {
                 resource.insertAmazonProductSearchData(data)
-                return data
+
+                return    DataOrException(data.amazonProductSearchResults!!.productResults!!.results!!.map { it!!.toAmazonProductResult() }, null, false)
             }
-            return data
+            return DataOrException(null, response.exception!!, false)
         }
 
         if (helper.shouldUpdateOrNoDatabase(
@@ -33,25 +38,20 @@ class AmazonSearchProductRepository : KoinComponent {
                 differenceMinutes = differenceMinutes
             )
         ) {
-            resource.deleteAmazonProductSearchData()
-            val data = client.fetchAmazonResult(product)
-            if (data != null) {
+            val response = client.fetchAmazonResult(product)
+            val data = response.data
+            //uma maneira de nao precisa comparar se possui internet
+            //caso der null no response e porque possivelmente nao conseguiu conexao por falha de internet
+            //ja que possuii data no local eu retorno o local
+            if (data  != null) {
+                resource.deleteAmazonProductSearchData()
                 resource.insertAmazonProductSearchData(data)
-                return data
+                return  DataOrException(data.amazonProductSearchResults!!.productResults!!.results!!.map { it!!.toAmazonProductResult() }, null, false)
             }
-
+            return DataOrException(amazonData.results, null, false)
         }
 
-        val amazonProduct: AmazonProductQuery.Data = AmazonProductQuery.Data(
-            amazonProductSearchResults = AmazonProductQuery.AmazonProductSearchResults(
-                productResults = AmazonProductQuery.ProductResults(
-                    results = amazonData!!.results.map {
-                        it.toAmazonProductResult()
-                    }
-                )
-            )
-        )
-        return amazonProduct
+        return DataOrException(amazonData.results, null, false)
 
 
     }

@@ -23,5 +23,11 @@ fun HomeScreen() {
 
     }
 
-    Text(text = "Ola")
+    if (amazonSearchProduct.isLoading) {
+        Text(text = "Loading...")
+    }else {
+        amazonSearchProduct.data?.get(0)?.let { Text(text = it.title) }
+    }
+
+
 }
