@@ -1,0 +1,24 @@
+
+CREATE TABLE AmazonProductCategory (
+    id TEXT PRIMARY KEY,
+    createdAt INTEGER NOT NULL,
+    resultAmazon TEXT,
+    name TEXT,
+    breadcrumbPath TEXT
+
+);
+
+insertAmazonProductCategory:
+INSERT  OR REPLACE INTO AmazonProductCategory(id,createdAt, resultAmazon, name, breadcrumbPath)
+VALUES (    ?,?,?,?,?);
+
+
+getAmazonProductByCategory:
+SELECT  * FROM AmazonProductCategory WHERE id = ?;
+
+
+getAllAmazonProductByCategory:
+SELECT * FROM AmazonProductCategory;
+
+deleteAmazonPRoductByCategoryById:
+DELETE FROM AmazonProductCategory WHERE id = ?;

@@ -1,26 +1,21 @@
 package com.ecommerce.beatiful.data.model
 
-import com.ecommerce.beatiful.AmazonProductQuery
+import com.ecommerce.beatiful.AmazonProductByCategoryQuery
+import com.ecommerce.beatiful.AmazonProductSearchQuery
 import kotlinx.serialization.Serializable
 
 
-data class  AmazonProductDataSerialization(
-    val id: Long,
-    val createAt: Long,
-    val results: List<AmazonResultSerialization>
-
-)
 
 @Serializable
 data class  AmazonResultSerialization(
-  val asin: String? = null,
-  val imageUrls: List<String?>? = listOf(),
-  val price: String,
-  val title: String,
-  val brand: String? = null,
-  val url: String,
-  val rating: Double,
-  val seller: AmazonSellerSerialization? = null
+    val asin: String? = null,
+    val imageUrls: List<String?>? = listOf(),
+    val price: String,
+    val title: String,
+    val brand: String? = null,
+    val url: String,
+    val rating: Double,
+    val seller: AmazonSellerSerialization? = null
 
 )
 
@@ -31,24 +26,25 @@ data class AmazonSellerSerialization(
     val rating: Double?
 )
 
-fun AmazonResultSerialization.toAmazonProductResult(): AmazonProductQuery.Result {
-    return AmazonProductQuery.Result(
+fun AmazonProductByCategoryQuery.Result.toAmazonProductResult(): AmazonResultSerialization {
+    return AmazonResultSerialization(
         asin = asin,
-        imageUrls = imageUrls as List<String>,
-        price = AmazonProductQuery.Price(display = price),
+        imageUrls = if(imageUrls == null) listOf() else imageUrls as List<String>,
+        price = price?.display ?: "",
         title = title,
         brand = brand,
-        url = url,
-        rating = rating,
-        seller = AmazonProductQuery.Seller(
+        url = url.toString(),
+        rating = rating ?: 0.0,
+        seller = AmazonSellerSerialization(
             name = seller?.name,
-            logoUrl = seller?.logoUrl,
+            logoUrl = seller?.logoUrl?.toString(),
             rating = seller?.rating
         )
     )
 }
 
-fun AmazonProductQuery.Result.toAmazonProductResult(): AmazonResultSerialization {
+
+fun AmazonProductSearchQuery.Result.toAmazonProductResult(): AmazonResultSerialization {
     return AmazonResultSerialization(
         asin = asin,
         imageUrls = imageUrls as List<String>,
@@ -64,5 +60,4 @@ fun AmazonProductQuery.Result.toAmazonProductResult(): AmazonResultSerialization
         )
     )
 }
-
 

@@ -1,7 +1,6 @@
 package com.ecommerce.beatiful.data.repository
 
 import com.apollographql.apollo.exception.ApolloException
-import com.ecommerce.beatiful.AmazonProductQuery
 import com.ecommerce.beatiful.data.client.AmazonProductClient
 import com.ecommerce.beatiful.data.local.AmazonProductSearchResource
 import com.ecommerce.beatiful.data.model.AmazonResultSerialization
@@ -23,7 +22,7 @@ class AmazonSearchProductRepository : KoinComponent {
         val amazonData = resource.getAmazonProductSearchData()
 
         if (amazonData == null) {
-            val response = client.fetchAmazonResult(product)
+            val response = client.fetchAmazonSearchProduct(product)
             val data = response.data
             if (data != null) {
                 resource.insertAmazonProductSearchData(data)
@@ -38,7 +37,7 @@ class AmazonSearchProductRepository : KoinComponent {
                 differenceMinutes = differenceMinutes
             )
         ) {
-            val response = client.fetchAmazonResult(product)
+            val response = client.fetchAmazonSearchProduct(product)
             val data = response.data
             //uma maneira de nao precisa comparar se possui internet
             //caso der null no response e porque possivelmente nao conseguiu conexao por falha de internet

@@ -1,0 +1,22 @@
+query amazonProductSearch($searchTerm: String!) {
+    amazonProductSearchResults(input: {searchTerm: $searchTerm}) {
+        productResults {
+            results {
+                imageUrls
+                rating
+                price {
+                    display
+                }
+                title
+                url
+                brand
+                asin
+                seller {
+                    logoUrl
+                    name
+                    rating
+                }
+            }
+        }
+    }
+}

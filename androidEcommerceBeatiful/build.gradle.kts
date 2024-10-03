@@ -44,9 +44,16 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     debugImplementation(libs.compose.ui.tooling)
 
+    //navigation
+    implementation(libs.navigation.compose)
+    implementation(libs.bottom.navigation)
 
     //koin
     implementation(libs.koin.androidx.core)
     implementation(libs.koin.android)
+
+
+    //lottie
+    implementation(libs.lottie.compose)
 
 }

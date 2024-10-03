@@ -1,9 +1,6 @@
 package com.ecommerce.beatiful.viewModel
 
 import com.apollographql.apollo.exception.ApolloException
-import com.ecommerce.beatiful.AmazonProductQuery
-import com.ecommerce.beatiful.data.client.AmazonProductClient
-import com.ecommerce.beatiful.data.client.ApolloImplementation
 import com.ecommerce.beatiful.data.model.AmazonResultSerialization
 import com.ecommerce.beatiful.data.repository.AmazonSearchProductRepository
 import com.ecommerce.beatiful.util.CoroutineViewModel

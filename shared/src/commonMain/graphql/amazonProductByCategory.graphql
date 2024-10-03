@@ -1,6 +1,9 @@
-query amazonProduct($searchTerm: String!) {
-    amazonProductSearchResults(input: {searchTerm: $searchTerm}) {
-        productResults {
+query amazonProductByCategory($categoryId: String!) {
+    amazonProductCategory(input: {categoryId: $categoryId}) {
+        name
+        id
+        breadcrumbPath
+        productResults(input: {page: "1"}) {
             results {
                 imageUrls
                 rating

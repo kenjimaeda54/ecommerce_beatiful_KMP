@@ -9,6 +9,7 @@ import com.apollographql.apollo.api.http.HttpRequest
 import com.apollographql.apollo.api.http.HttpResponse
 import com.apollographql.apollo.interceptor.ApolloInterceptor
 import com.apollographql.apollo.interceptor.ApolloInterceptorChain
+import com.apollographql.apollo.network.http.DefaultHttpEngine
 import com.apollographql.apollo.network.http.HttpInterceptor
 import com.apollographql.apollo.network.http.HttpInterceptorChain
 import kotlinx.coroutines.flow.Flow
@@ -19,6 +20,7 @@ class ApolloImplementation() : IApolloClient {
     override val apollo: ApolloClient
         get() = ApolloClient.Builder().serverUrl("https://graphql.canopyapi.co/")
             .addHttpInterceptor(ApolloInterceptors("6385f7dd-ffa3-488f-b024-1b2af735bec5"))
+            .httpEngine(DefaultHttpEngine(timeoutMillis = 300000))
             .addInterceptor(LoggingApolloInterceptor()).build()
 
 }
@@ -40,7 +42,7 @@ class LoggingApolloInterceptor : ApolloInterceptor {
     ): Flow<ApolloResponse<D>> {
         return chain.proceed(request).onEach { response ->
             if (response.exception != null) {
-                print("error request: ${response.exception}")
+                 print("error request: ${response.exception}")
             }
         }
     }

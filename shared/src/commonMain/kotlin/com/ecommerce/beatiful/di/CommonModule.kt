@@ -4,7 +4,9 @@ import app.cash.sqldelight.db.SqlDriver
 import com.ecommerce.beatiful.data.client.AmazonProductClient
 import com.ecommerce.beatiful.data.client.ApolloImplementation
 import com.ecommerce.beatiful.data.client.IApolloClient
+import com.ecommerce.beatiful.data.local.AmazonProductByCategoryResource
 import com.ecommerce.beatiful.data.local.AmazonProductSearchResource
+import com.ecommerce.beatiful.data.repository.AmazonProductByCategoryRepository
 import com.ecommerce.beatiful.data.repository.AmazonSearchProductRepository
 import com.ecommerce.beatiful.db.EcommerceDB
 import com.ecommerce.beatiful.viewModel.AmazonSearchProductViewModel
@@ -40,16 +42,19 @@ private val coreDatabase = module {
 
 private val clientModule = module {
     single {  AmazonProductClient(get()) }
+    single { AmazonProductClient(get()) }
     factory<IApolloClient> { ApolloImplementation() }
     factory<ApolloImplementation> { ApolloImplementation() }
 }
 
 private val localResourceModule = module {
     single { AmazonProductSearchResource(get()) }
+    single { AmazonProductByCategoryResource(get()) }
 }
 
 private val repositoryModule = module {
     single { AmazonSearchProductRepository() }
+    single { AmazonProductByCategoryRepository() }
 
 }
 
