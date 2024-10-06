@@ -86,7 +86,7 @@ apollo {
         packageName.set("com.ecommerce.beatiful")
         introspection {
             endpointUrl.set("https://graphql.canopyapi.co/")
-            headers.set(mapOf("API-KEY" to "6385f7dd-ffa3-488f-b024-1b2af735bec5"))
+            headers.set(mapOf("API-KEY" to "2a4bd28b-83f4-435a-9fa7-911047f30081\n"))
             schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
             generateInputBuilders.set(true)
         }

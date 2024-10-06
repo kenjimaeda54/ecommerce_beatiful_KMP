@@ -56,4 +56,7 @@ dependencies {
     //lottie
     implementation(libs.lottie.compose)
 
+    //coil
+    implementation(libs.coil.image)
+
 }

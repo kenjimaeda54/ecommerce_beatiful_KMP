@@ -19,7 +19,7 @@ class ApolloImplementation() : IApolloClient {
 
     override val apollo: ApolloClient
         get() = ApolloClient.Builder().serverUrl("https://graphql.canopyapi.co/")
-            .addHttpInterceptor(ApolloInterceptors("6385f7dd-ffa3-488f-b024-1b2af735bec5"))
+            .addHttpInterceptor(ApolloInterceptors("2a4bd28b-83f4-435a-9fa7-911047f30081"))
             .httpEngine(DefaultHttpEngine(timeoutMillis = 300000))
             .addInterceptor(LoggingApolloInterceptor()).build()
 

@@ -10,7 +10,7 @@ data class AmazonProductCategoryModel(
     val createAt: Long,
     val name: String?,
     val breadcrumbPath: String?,
-    val results: List<AmazonResultSerialization>?
+    var results: List<AmazonResultSerialization>?
 )
 
 

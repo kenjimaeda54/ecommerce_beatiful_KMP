@@ -6,6 +6,6 @@ val categoryMap = mapOf(
     "15342831" to "Limpeza",
     "16227130011" to "Video Games",
     "172282" to "Eletronicos",
-    "3760901" to "Saude",
+    "3760901" to "Saude / Limpeza",
 )
 
