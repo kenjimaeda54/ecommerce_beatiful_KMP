@@ -66,7 +66,7 @@ fun CustomTextField(
             fontFamily = fontsOpenSans,
             fontWeight = FontWeight.Normal,
             fontSize = 17.sp,
-            color = MaterialTheme.colorScheme.primaryContainer
+            color = MaterialTheme.colorScheme.tertiary
         ),
         onValueChange = onValueChange) {
         OutlinedTextFieldDefaults.DecorationBox(

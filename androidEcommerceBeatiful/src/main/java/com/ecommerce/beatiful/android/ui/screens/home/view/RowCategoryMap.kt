@@ -42,9 +42,9 @@ import com.ecommerce.beatiful.data.model.AmazonResultSerialization
 
 
 @Composable
-fun RowCategoryMap(item: AmazonResultSerialization) {
+fun RowCategoryMap(modifier: Modifier = Modifier,item: AmazonResultSerialization) {
     Column(
-        modifier = Modifier
+        modifier = modifier
             .width(120.dp),
     ) {
         Column(
