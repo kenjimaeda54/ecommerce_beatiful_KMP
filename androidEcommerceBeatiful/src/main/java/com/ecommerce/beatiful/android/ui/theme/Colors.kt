@@ -4,6 +4,7 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
 
+
 val colors = lightColorScheme(
     primary = Color(0xFFFFFFFF),
     secondary = Color(0xFFA9A9A9),

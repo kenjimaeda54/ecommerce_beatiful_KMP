@@ -44,11 +44,14 @@ kotlin {
             implementation(libs.datetime)
             implementation(libs.sql.coroutines.extensions)
             implementation(libs.kotlinx.serialization)
+            implementation(libs.touchlab.stately.common)
+
         }
 
         iosMain.dependencies {
             implementation(libs.sql.native.driver)
-
+            implementation(libs.touchlab.stately.isolate)
+            implementation(libs.touchlab.stately.common)
         }
 
         androidMain.dependencies {
@@ -86,7 +89,7 @@ apollo {
         packageName.set("com.ecommerce.beatiful")
         introspection {
             endpointUrl.set("https://graphql.canopyapi.co/")
-            headers.set(mapOf("API-KEY" to "2a4bd28b-83f4-435a-9fa7-911047f30081\n"))
+            headers.set(mapOf("API-KEY" to "aedb8689-8a90-4f0f-ae16-7c983d35664d"))
             schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
             generateInputBuilders.set(true)
         }

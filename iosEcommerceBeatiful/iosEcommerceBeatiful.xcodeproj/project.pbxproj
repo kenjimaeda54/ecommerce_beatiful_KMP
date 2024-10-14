@@ -10,7 +10,19 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
-		7555FF83242A565900829871 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* ContentView.swift */; };
+		817D87C32CBA84BC007D27A3 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D87C22CBA84BC007D27A3 /* HomeScreen.swift */; };
+		817D87C52CBA861D007D27A3 /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D87C42CBA85E1007D27A3 /* HomeState.swift */; };
+		817D87C72CBA89AF007D27A3 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D87C62CBA8997007D27A3 /* LoadingState.swift */; };
+		817D87C92CBA8DDC007D27A3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 817D87C82CBA8DDC007D27A3 /* libsqlite3.tbd */; };
+		817E176B2CBD60B900536D9B /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817E176A2CBD60B900536D9B /* OpenSans-Light.ttf */; };
+		817E176F2CBD60DE00536D9B /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817E176C2CBD60DE00536D9B /* OpenSans-Bold.ttf */; };
+		817E17702CBD60DE00536D9B /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817E176D2CBD60DE00536D9B /* OpenSans-Medium.ttf */; };
+		817E17712CBD60DE00536D9B /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817E176E2CBD60DE00536D9B /* OpenSans-Regular.ttf */; };
+		817E17732CBD60FE00536D9B /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817E17722CBD60FE00536D9B /* OpenSans-SemiBold.ttf */; };
+		81B7EA7A2CB9F8F400FB864F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B7EA792CB9F8EB00FB864F /* Fonts.swift */; };
+		81B7EA7C2CB9F96E00FB864F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B7EA7B2CB9F96900FB864F /* Colors.swift */; };
+		81C3AE812CBA9247007867A6 /* categoryMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C3AE802CBA922C007867A6 /* categoryMap.swift */; };
+		81C3AE842CBACE76007867A6 /* RowItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C3AE832CBACE76007867A6 /* RowItemCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -31,8 +43,20 @@
 		058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2152FB032600AC8F00CF470E /* iOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSApp.swift; sourceTree = "<group>"; };
 		7555FF7B242A565900829871 /* iosEcommerceBeatiful.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iosEcommerceBeatiful.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7555FF82242A565900829871 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		817D87C22CBA84BC007D27A3 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		817D87C42CBA85E1007D27A3 /* HomeState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeState.swift; sourceTree = "<group>"; };
+		817D87C62CBA8997007D27A3 /* LoadingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingState.swift; sourceTree = "<group>"; };
+		817D87C82CBA8DDC007D27A3 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		817E176A2CBD60B900536D9B /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		817E176C2CBD60DE00536D9B /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		817E176D2CBD60DE00536D9B /* OpenSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Medium.ttf"; sourceTree = "<group>"; };
+		817E176E2CBD60DE00536D9B /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		817E17722CBD60FE00536D9B /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		81B7EA792CB9F8EB00FB864F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		81B7EA7B2CB9F96900FB864F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		81C3AE802CBA922C007867A6 /* categoryMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = categoryMap.swift; sourceTree = "<group>"; };
+		81C3AE832CBACE76007867A6 /* RowItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowItemCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				817D87C92CBA8DDC007D27A3 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,8 +99,9 @@
 		7555FF7D242A565900829871 /* iosEcommerceBeatiful */ = {
 			isa = PBXGroup;
 			children = (
+				81B7EA2E2CB9F6D800FB864F /* Utils */,
+				81B7EA2D2CB9F6C000FB864F /* Ui */,
 				058557BA273AAA24004C7B11 /* Assets.xcassets */,
-				7555FF82242A565900829871 /* ContentView.swift */,
 				7555FF8C242A565B00829871 /* Info.plist */,
 				2152FB032600AC8F00CF470E /* iOSApp.swift */,
 				058557D7273AAEEB004C7B11 /* Preview Content */,
@@ -86,8 +112,75 @@
 		7555FFB0242A642200829871 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				817D87C82CBA8DDC007D27A3 /* libsqlite3.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		817D87BD2CBA847A007D27A3 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				817D87BF2CBA8488007D27A3 /* Home */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		817D87BF2CBA8488007D27A3 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				81C3AE852CBAD109007867A6 /* view */,
+				817D87C42CBA85E1007D27A3 /* HomeState.swift */,
+				817D87C22CBA84BC007D27A3 /* HomeScreen.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		81B7EA2D2CB9F6C000FB864F /* Ui */ = {
+			isa = PBXGroup;
+			children = (
+				817D87BD2CBA847A007D27A3 /* Screens */,
+				81B7EA2F2CB9F6E900FB864F /* Theme */,
+			);
+			path = Ui;
+			sourceTree = "<group>";
+		};
+		81B7EA2E2CB9F6D800FB864F /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				81C3AE802CBA922C007867A6 /* categoryMap.swift */,
+				817D87C62CBA8997007D27A3 /* LoadingState.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		81B7EA2F2CB9F6E900FB864F /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				81B7EA7B2CB9F96900FB864F /* Colors.swift */,
+				81B7EA792CB9F8EB00FB864F /* Fonts.swift */,
+				81B7EA782CB9F7A900FB864F /* fonts */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		81B7EA782CB9F7A900FB864F /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				817E17722CBD60FE00536D9B /* OpenSans-SemiBold.ttf */,
+				817E176C2CBD60DE00536D9B /* OpenSans-Bold.ttf */,
+				817E176D2CBD60DE00536D9B /* OpenSans-Medium.ttf */,
+				817E176E2CBD60DE00536D9B /* OpenSans-Regular.ttf */,
+				817E176A2CBD60B900536D9B /* OpenSans-Light.ttf */,
+			);
+			path = fonts;
+			sourceTree = "<group>";
+		};
+		81C3AE852CBAD109007867A6 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				81C3AE832CBACE76007867A6 /* RowItemCard.swift */,
+			);
+			path = view;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -150,7 +243,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				817E176F2CBD60DE00536D9B /* OpenSans-Bold.ttf in Resources */,
+				817E17702CBD60DE00536D9B /* OpenSans-Medium.ttf in Resources */,
+				817E17732CBD60FE00536D9B /* OpenSans-SemiBold.ttf in Resources */,
+				817E17712CBD60DE00536D9B /* OpenSans-Regular.ttf in Resources */,
 				058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */,
+				817E176B2CBD60B900536D9B /* OpenSans-Light.ttf in Resources */,
 				058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,8 +280,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				817D87C72CBA89AF007D27A3 /* LoadingState.swift in Sources */,
+				817D87C32CBA84BC007D27A3 /* HomeScreen.swift in Sources */,
+				817D87C52CBA861D007D27A3 /* HomeState.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
-				7555FF83242A565900829871 /* ContentView.swift in Sources */,
+				81B7EA7C2CB9F96E00FB864F /* Colors.swift in Sources */,
+				81C3AE842CBACE76007867A6 /* RowItemCard.swift in Sources */,
+				81B7EA7A2CB9F8F400FB864F /* Fonts.swift in Sources */,
+				81C3AE812CBA9247007867A6 /* categoryMap.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,8 +435,12 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosEcommerceBeatiful;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -361,8 +469,12 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = orgIdentifier.iosEcommerceBeatiful;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
