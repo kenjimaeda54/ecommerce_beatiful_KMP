@@ -8,6 +8,7 @@
 
 import SwiftUI
 
+@available(iOS 17.0, *)
 struct HomeScreen: View {
 	@State var searchProduct: String = ""
 	@StateObject private var homeState = HomeState()
@@ -16,11 +17,36 @@ struct HomeScreen: View {
 		GeometryReader { geometry in
 			VStack {
 				VStack {
-					TextField("Search", text: $searchProduct)
-						.padding(.horizontal,15)
-						.padding(.bottom, 20)
+					ZStack {
+						
+						if(searchProduct.isEmpty) {
+							
+							Image(systemName: "magnifyingglass")
+								.foregroundStyle(Colors.black.opacity(0.7))
+								.padding(.trailing, geometry.size.width * 0.65)
+							
+							Text("Pesquisar na loja como todo")
+								.font(.custom(FontsApp.openSansLight, size: 17))
+								.foregroundStyle(Colors.black.opacity(0.7))
+								.multilineTextAlignment(.center)
+						}
+						
+						TextField("", text: $searchProduct)
+							.padding(.leading,20)
+							.font(.custom(FontsApp.openSansRegular, size: 17))
+							.foregroundStyle(Colors.black.opacity(0.9))
+						
+						
+					}
+					.padding(.vertical,10)
+					.background(
+						RoundedRectangle(cornerRadius: 10)
+							.fill(Colors.white)
+					)
 				}
-				.frame(height: geometry.size.height * 0.10,alignment: .bottom)
+				.padding(.top,geometry.safeAreaInsets.top + 60)
+				.padding(.bottom,geometry.safeAreaInsets.top + 30)
+				.padding(.horizontal,10)
 				.background(
 					UnevenRoundedRectangle(cornerRadii: .init(
 						topLeading: 0, bottomLeading: 10,bottomTrailing: 10,topTrailing: 0)
@@ -60,11 +86,12 @@ struct HomeScreen: View {
 				.listStyle(.plain)
 				.scrollContentBackground(.hidden)
 				.scrollIndicators(.hidden)
-				.padding(.vertical,15)
+				.padding(.top,15)
+				.padding(.bottom,35)
 				.background(
 					UnevenRoundedRectangle(cornerRadii: .init(topLeading: 10,bottomLeading: 0, bottomTrailing: 0, topTrailing: 10))
 						.fill(Colors.grayWithe)
-					)
+				)
 			}
 			
 		}
@@ -87,6 +114,4 @@ struct HomeScreen: View {
 	}
 }
 
-#Preview {
-	HomeScreen()
-}
+

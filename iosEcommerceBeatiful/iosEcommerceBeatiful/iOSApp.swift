@@ -1,6 +1,7 @@
 import SwiftUI
 import shared
 
+@available(iOS 17.0, *)
 @main
 struct iOSApp: App {
 	
