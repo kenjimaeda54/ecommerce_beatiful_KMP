@@ -13,6 +13,7 @@ struct HomeScreen: View {
 	@State var searchProduct: String = ""
 	@StateObject private var homeState = HomeState()
 	
+	
 	var body: some View {
 		GeometryReader { geometry in
 			VStack {
@@ -55,7 +56,30 @@ struct HomeScreen: View {
 					
 				)
 				Spacer(minLength: 25)
-				ZStack{
+				
+				VStack(alignment: .leading){
+					Text("Categorias")
+								.font(.custom(FontsApp.openSansBold, size: 17))
+								.foregroundStyle(Colors.black)
+								.padding(.top,15)
+								.padding(.horizontal,15)
+					
+					List {
+						ScrollView(.horizontal)  {
+													
+							LazyHStack(spacing: 15) {
+								ForEach(categoryMap,id: \.id) { item in
+									RowItemCategory(item: item)
+								}
+							}
+							
+						}
+						.listRowSeparator(.hidden)
+						.listRowInsets(.init(top:0, leading: 10, bottom: 0, trailing: 0))
+						.listRowBackground(Color.clear)
+					}
+					.frame(height: geometry.size.height * 0.10)
+					.listStyle(.plain)
 					List {
 						ForEach(homeState.productsByCategory,id: \.id) {product in
 							Text(product.name ?? "")
@@ -103,9 +127,9 @@ struct HomeScreen: View {
 			Colors.white
 		)
 		.task {
-			categoryMap.forEach { (key,value)   in
+			categoryMap.forEach { item   in
 				Task {
-					await homeState.getProduct(id: key)
+					await homeState.getProduct(id: item.id)
 				}
 				
 			}
