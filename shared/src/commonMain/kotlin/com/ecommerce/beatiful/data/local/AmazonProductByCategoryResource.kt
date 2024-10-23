@@ -3,7 +3,6 @@ package com.ecommerce.beatiful.data.local
 import com.ecommerce.beatiful.AmazonProductByCategoryQuery
 import com.ecommerce.beatiful.data.model.AmazonProductCategoryModel
 import com.ecommerce.beatiful.data.model.AmazonResultSerialization
-import com.ecommerce.beatiful.data.model.toAmazonProductCategoryModel
 import com.ecommerce.beatiful.data.model.toAmazonProductResult
 import com.ecommerce.beatiful.db.EcommerceDB
 import com.ecommerce.beatiful.util.Helpers

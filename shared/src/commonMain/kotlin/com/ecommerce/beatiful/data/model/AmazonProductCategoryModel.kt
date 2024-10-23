@@ -14,16 +14,6 @@ data class AmazonProductCategoryModel(
 )
 
 
-fun AmazonProductCategory.toAmazonProductCategoryModel(): AmazonProductCategoryModel {
-    return AmazonProductCategoryModel(
-        id = id,
-        createAt = createdAt,
-        name = name,
-        breadcrumbPath = breadcrumbPath,
-        results = resultAmazon as List<AmazonResultSerialization>
-    )
-}
-
 fun AmazonProductByCategoryQuery.Data.toAmazonProductCategory(): AmazonProductCategoryModel {
     return AmazonProductCategoryModel(
         id = amazonProductCategory!!.id!!,

@@ -10,10 +10,10 @@
 		058557BB273AAA24004C7B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557BA273AAA24004C7B11 /* Assets.xcassets */; };
 		058557D9273AAEEB004C7B11 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 058557D8273AAEEB004C7B11 /* Preview Assets.xcassets */; };
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
+		8166656E2CC878F6001CC200 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 817D87C82CBA8DDC007D27A3 /* libsqlite3.tbd */; };
 		817D87C32CBA84BC007D27A3 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D87C22CBA84BC007D27A3 /* HomeScreen.swift */; };
 		817D87C52CBA861D007D27A3 /* HomeState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D87C42CBA85E1007D27A3 /* HomeState.swift */; };
 		817D87C72CBA89AF007D27A3 /* LoadingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817D87C62CBA8997007D27A3 /* LoadingState.swift */; };
-		817D87C92CBA8DDC007D27A3 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 817D87C82CBA8DDC007D27A3 /* libsqlite3.tbd */; };
 		817E176B2CBD60B900536D9B /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817E176A2CBD60B900536D9B /* OpenSans-Light.ttf */; };
 		817E176F2CBD60DE00536D9B /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817E176C2CBD60DE00536D9B /* OpenSans-Bold.ttf */; };
 		817E17702CBD60DE00536D9B /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817E176D2CBD60DE00536D9B /* OpenSans-Medium.ttf */; };
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				817D87C92CBA8DDC007D27A3 /* libsqlite3.tbd in Frameworks */,
+				8166656E2CC878F6001CC200 /* libsqlite3.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +232,8 @@
 				Base,
 			);
 			mainGroup = 7555FF72242A565900829871;
+			packageReferences = (
+			);
 			productRefGroup = 7555FF7C242A565900829871 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";

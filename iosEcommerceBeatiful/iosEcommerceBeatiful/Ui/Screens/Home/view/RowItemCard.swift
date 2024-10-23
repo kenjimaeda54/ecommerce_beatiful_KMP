@@ -12,52 +12,63 @@ import shared
 struct RowItemCard: View {
 	let product: AmazonResultSerialization
 	
+	func renderImage() -> some View {
+		return	Image("image_placeholder")
+									.resizable()
+									.frame(width: 120,height: 150)
+									.scaledToFill()
+	}
+	
 	var body: some View {
 		VStack {
-			VStack(alignment: .trailing) {
-				Image(systemName:  "heart")
-					.foregroundStyle(Colors.white)
-					.padding(3)
-					.background(
-						Circle()
-							.fill(Colors.gray)
-					)
-				if let images = product.imageUrls {
+			if let images = product.imageUrls {
+				
+				if let imagesUrl = images as? [String] {
 					
-					if let imagesUrl = images as? [String] {
-						AsyncImage(url: URL(string: imagesUrl.first!)) { image in
+					VStack(alignment: .trailing) {
+						Image(systemName:  "heart")
+							.foregroundStyle(Colors.white)
+							.padding(3)
+							.background(
+								Circle()
+									.fill(Colors.gray)
+							)
+						if(!imagesUrl.isEmpty) {
+							AsyncImage(url: URL(string: imagesUrl.first!)) { image in
+								
+								image
+									.resizable()
+									.frame(width: 120,height: 150)
+									.scaledToFill()
+								
+							}placeholder: {
+								renderImage()
+							}
 							
-							image
-								.resizable()
-								.frame(width: 120,height: 150)
-								.scaledToFill()
-							
-						}placeholder: {
-							Image("image_placeholder")
-								.resizable()
-								.frame(width: 120,height: 150)
-								.scaledToFill()
-							
+						}else {
+							renderImage()
 						}
+					}
+					.padding(5)
+					.background(
+						RoundedRectangle(cornerRadius: 10)
+							.fill(Colors.white)
+					)
+					VStack(alignment: .leading) {
+						Text(product.title)
+							.font(.custom(FontsApp.openSansLight, size: 17))
+							.fontWeight(.light)
+							.lineLimit(3)
+							.frame(minHeight: 90)
+							.fixedSize(horizontal: false, vertical: true)
+						Text(product.price)
+							.font(Font.custom(FontsApp.openSansBold, size: 17))
+							.foregroundStyle(Colors.black)
+						
 					}
 					
 				}
 				
-			}
-			.padding(5)
-			.background(
-				RoundedRectangle(cornerRadius: 10)
-					.fill(Colors.white)
-			)
-			VStack(alignment: .leading) {
-				Text(product.title)
-					.font(.custom(FontsApp.openSansLight, size: 17))
-					.fontWeight(.light)
-					.lineLimit(3)
-					.fixedSize(horizontal: false, vertical: true)
-				Text(product.price)
-					.font(Font.custom(FontsApp.openSansBold, size: 17))
-					.foregroundStyle(Colors.black)
 				
 			}
 			
