@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import shared
 
 @available(iOS 17.0, *)
 struct HomeScreen: View {
@@ -73,7 +74,7 @@ struct HomeScreen: View {
 									ForEach(Array(categoryMap.enumerated()),id: \.1.id) { (index,item) in
 										Button {
 											withAnimation {
-											 value.scrollTo(index,anchor: .top)
+												value.scrollTo(index,anchor: .top)
 											}
 										} label: {
 											RowItemCategory(item:item)
@@ -101,8 +102,16 @@ struct HomeScreen: View {
 									.padding(.top,15)
 									.id(index)
 								if(product.results!.isEmpty) {
-									Text("Loading")
-										.font(.custom(FontsApp.openSansRegular, size: 17))
+									ScrollView(.horizontal) {
+										LazyHStack(spacing: 10) {
+											ForEach(0..<10) { _ in
+												RoundedRectangle(cornerRadius: 10)
+													.frame(width: 130, height: 150)
+											}
+										}
+										.redactShimmer(condition: true)
+										
+									}
 								}else {
 									ScrollView(.horizontal) {
 										LazyHStack(spacing: 10) {
