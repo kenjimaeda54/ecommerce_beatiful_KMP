@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
@@ -14,6 +16,9 @@ plugins {
     //serialize
     alias(libs.plugins.serialization)
 
+    //build config
+    alias(libs.plugins.config.build)
+
 }
 
 kotlin {
@@ -24,6 +29,16 @@ kotlin {
             }
         }
     }
+
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").inputStream())
+    val apiKey = properties.getProperty("API_KEY")
+
+    buildConfig {
+        buildConfigField("String", "API_KEY", "\"$apiKey\"")
+    }
+
+
 
     listOf(
         iosX64(),
@@ -85,11 +100,14 @@ android {
 //tambem quando o campo e obrigatorio precisa ser String!
 //o arquivo gerado automatico e graphls
 apollo {
+    val properties = Properties()
+    properties.load(project.rootProject.file("local.properties").inputStream())
+    val apiKey = properties.getProperty("API_KEY")
     service("service") {
         packageName.set("com.ecommerce.beatiful")
         introspection {
             endpointUrl.set("https://graphql.canopyapi.co/")
-            headers.set(mapOf("API-KEY" to "38cd5b5d-f6aa-47ba-afaa-36731586543b"))
+            headers.set(mapOf("API-KEY" to apiKey))
             schemaFile.set(file("src/commonMain/graphql/schema.graphqls"))
             generateInputBuilders.set(true)
         }

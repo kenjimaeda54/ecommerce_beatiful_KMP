@@ -20,6 +20,7 @@ compose-navigation = "1.6.8"
 navigation-compose = "2.7.7"
 coil = "2.7.0"
 statly-common = "2.0.5"
+config-build = "5.4.0"
 
 
 [libraries]
@@ -64,3 +65,5 @@ touchlab-skie = { id = "co.touchlab.skie", version.ref = "touchlab-skia" }
 apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
 sqdelight = { id = "app.cash.sqldelight", version.ref = "sqdelight" }
 serialization = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization"}
+config-build = { id = "com.github.gmazzo.buildconfig", version.ref = "config-build" }
+

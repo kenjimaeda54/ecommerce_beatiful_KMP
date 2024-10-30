@@ -13,8 +13,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -50,6 +52,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.ecommerce.beatiful.R
+import com.ecommerce.beatiful.android.modifier.shimmerBackground
 import com.ecommerce.beatiful.android.ui.screens.home.view.CustomTextField
 import com.ecommerce.beatiful.android.ui.screens.home.view.RowCategoryMap
 import com.ecommerce.beatiful.android.ui.theme.EcommerceTheme
@@ -152,30 +155,35 @@ fun HomeScreen() {
                                     ),
                                 contentAlignment = Alignment.Center
                             ) {
-                                when(categoryMap.values.toList()[index]){
+                                when (categoryMap.values.toList()[index]) {
                                     "Mochilas" -> Icon(
                                         modifier = Modifier.size(30.dp),
                                         painter = painterResource(id = com.ecommerce.beatiful.android.R.drawable.backpaback),
                                         contentDescription = null,
                                         tint = MaterialTheme.colorScheme.tertiary
                                     )
+
                                     "Limpeza" -> Icon(
                                         modifier = Modifier.size(30.dp),
                                         painter = painterResource(id = com.ecommerce.beatiful.android.R.drawable.clean),
                                         contentDescription = null,
                                         tint = MaterialTheme.colorScheme.tertiary
                                     )
+
                                     "Video Games" -> Icon(
                                         modifier = Modifier.size(30.dp),
                                         painter = painterResource(id = com.ecommerce.beatiful.android.R.drawable.game),
                                         contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.tertiary                                    )
+                                        tint = MaterialTheme.colorScheme.tertiary
+                                    )
+
                                     "Eletronicos" -> Icon(
                                         modifier = Modifier.size(30.dp),
                                         painter = painterResource(id = com.ecommerce.beatiful.android.R.drawable.eletronic),
                                         contentDescription = null,
                                         tint = MaterialTheme.colorScheme.tertiary
                                     )
+
                                     else -> Icon(
                                         modifier = Modifier.size(30.dp),
                                         painter = painterResource(id = com.ecommerce.beatiful.android.R.drawable.health),
@@ -197,42 +205,53 @@ fun HomeScreen() {
                     }
                 }
 
-               LazyColumn(
-                   state = stateLazy
+                LazyColumn(
+                    state = stateLazy
                 ) {
-                   items(categoryMap.entries.size) { categoryIndex ->
-                       val id = categoryMap.keys.toList()[categoryIndex]
-                       viewModel.getProductByCategory(categoryId = id, differenceMinutes = 1)
-                       val findProduct = allProductsList.find { it.id == id }
-                       Text(
-                           categoryMap[id] ?: "",
-                           modifier = Modifier
-                               .padding(start = 10.dp, top = 25.dp),
-                          fontFamily = fontsOpenSans,
-                           fontWeight = FontWeight.Bold,
-                           color = MaterialTheme.colorScheme.tertiary.copy(0.7f)
-                       )
+                    items(categoryMap.entries.size) { categoryIndex ->
+                        val id = categoryMap.keys.toList()[categoryIndex]
+                        viewModel.getProductByCategory(categoryId = id, differenceMinutes = 1)
+                        val findProduct = allProductsList.find { it.id == id }
+                        Text(
+                            categoryMap[id] ?: "",
+                            modifier = Modifier
+                                .padding(start = 10.dp, top = 25.dp),
+                            fontFamily = fontsOpenSans,
+                            fontWeight = FontWeight.Bold,
+                            color = MaterialTheme.colorScheme.tertiary.copy(0.7f)
+                        )
 
-                       if (findProduct?.results?.isEmpty() == true) {
-                           Text(
-                               text = "Loading",
-                               fontFamily = fontsOpenSans,
-                               fontWeight = FontWeight.Bold,
-                               color = MaterialTheme.colorScheme.primary
-                           )
-                       } else {
-                           LazyRow(
-                               horizontalArrangement = Arrangement.spacedBy(15.dp),
-                               contentPadding = PaddingValues(start = 10.dp)
-                           ) {
-                               items(findProduct?.results!!.size) { productIndex ->
-                                   RowCategoryMap(
-                                       item = findProduct.results!![productIndex]
-                                   )
-                               }
-                           }
-                       }
-                   }
+                        if (findProduct?.results?.isEmpty() == true) {
+                            LazyRow(
+                                horizontalArrangement = Arrangement.spacedBy(15.dp),
+                                contentPadding = PaddingValues(start = 10.dp)
+                            ) {
+                                items(10) {
+                                    Box(
+                                        modifier = Modifier
+                                            .height(150.dp)
+                                            .width(120.dp)
+                                            .shimmerBackground(
+                                                shape = RoundedCornerShape(10.dp)
+                                            )
+                                    ) {
+
+                                    }
+                                }
+                            }
+                        } else {
+                            LazyRow(
+                                horizontalArrangement = Arrangement.spacedBy(15.dp),
+                                contentPadding = PaddingValues(start = 10.dp)
+                            ) {
+                                items(findProduct?.results!!.size) { productIndex ->
+                                    RowCategoryMap(
+                                        item = findProduct.results!![productIndex]
+                                    )
+                                }
+                            }
+                        }
+                    }
 
                 }
             }
