@@ -87,15 +87,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E91BE85A-D488-4D33-AAB0-A770B794C47C"
+            uuid = "275CC912-2529-48F0-9FC1-DAA1FB0260B0"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iosEcommerceBeatiful/Ui/Screens/Home/HomeScreen.swift"
+            filePath = "iosEcommerceBeatiful/Navigation/TabCustomNavigation/TabCustomNavigation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -103,15 +103,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "58EC9AAB-9373-4200-A159-F8DD85A752EF"
+            uuid = "A469DDCF-57B2-46D4-96AF-0843D97FD227"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iosEcommerceBeatiful/Ui/Screens/Home/view/RowItemCard.swift"
+            filePath = "iosEcommerceBeatiful/Navigation/TabCustomNavigation/TabCustomNavigation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "18"
+            endingLineNumber = "18"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -119,31 +119,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "162B888E-979F-4CA2-BBC1-76180820C167"
+            uuid = "E5BAC062-0B28-4422-B1E3-DA4828115398"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "iosEcommerceBeatiful/Ui/Screens/Home/view/RowItemCard.swift"
+            filePath = "iosEcommerceBeatiful/Navigation/TabCustomNavigation/TabCustomNavigation.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "01DCCA59-3E9B-42B0-BAFE-90796035F566"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "iosEcommerceBeatiful/Ui/Screens/Home/view/RowItemCard.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>

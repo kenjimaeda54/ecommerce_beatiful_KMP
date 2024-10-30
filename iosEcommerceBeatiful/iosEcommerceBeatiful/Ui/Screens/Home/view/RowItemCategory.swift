@@ -16,6 +16,7 @@ struct RowItemCategory: View {
 				.resizable()
 				.frame(width: 30,height: 30)
 				.padding(.all,3)
+				.foregroundStyle(Colors.black)
 				.background(
 					Circle()
 						.fill(Colors.white)
