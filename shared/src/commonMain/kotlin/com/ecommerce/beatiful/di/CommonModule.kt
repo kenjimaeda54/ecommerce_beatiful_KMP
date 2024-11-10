@@ -1,9 +1,11 @@
 package com.ecommerce.beatiful.di
 
-import app.cash.sqldelight.db.SqlDriver
-import com.ecommerce.beatiful.data.client.AmazonProductClient
-import com.ecommerce.beatiful.data.client.ApolloImplementation
-import com.ecommerce.beatiful.data.client.IApolloClient
+import com.ecommerce.beatiful.data.client.AmazonProduct
+import com.ecommerce.beatiful.data.client.Apollo.ApolloImplementation
+import com.ecommerce.beatiful.data.client.Apollo.IApolloClient
+import com.ecommerce.beatiful.data.client.Supabase
+import com.ecommerce.beatiful.data.client.SupabaseClient.SupabaseClient
+import com.ecommerce.beatiful.data.client.SupabaseClientImplementation.SupabaseClientImplementation
 import com.ecommerce.beatiful.data.local.AmazonProductByCategoryResource
 import com.ecommerce.beatiful.data.local.AmazonProductSearchResource
 import com.ecommerce.beatiful.data.repository.AmazonProductByCategoryRepository
@@ -41,10 +43,10 @@ private val coreDatabase = module {
 }
 
 private val clientModule = module {
-    single {  AmazonProductClient(get()) }
-    single { AmazonProductClient(get()) }
+    single {  AmazonProduct(get()) }
+    single { Supabase(get()) }
     factory<IApolloClient> { ApolloImplementation() }
-    factory<ApolloImplementation> { ApolloImplementation() }
+    factory<SupabaseClient> { SupabaseClientImplementation()  }
 }
 
 private val localResourceModule = module {

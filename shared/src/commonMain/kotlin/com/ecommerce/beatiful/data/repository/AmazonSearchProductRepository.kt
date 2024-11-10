@@ -1,7 +1,7 @@
 package com.ecommerce.beatiful.data.repository
 
 import com.apollographql.apollo.exception.ApolloException
-import com.ecommerce.beatiful.data.client.AmazonProductClient
+import com.ecommerce.beatiful.data.client.AmazonProduct
 import com.ecommerce.beatiful.data.local.AmazonProductSearchResource
 import com.ecommerce.beatiful.data.model.AmazonResultSerialization
 import com.ecommerce.beatiful.data.model.toAmazonProductResult
@@ -11,7 +11,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 class AmazonSearchProductRepository : KoinComponent {
-    private val client: AmazonProductClient by inject()
+    private val client: AmazonProduct by inject()
     private val resource: AmazonProductSearchResource by inject()
 
     suspend fun fetchAmazonResult(

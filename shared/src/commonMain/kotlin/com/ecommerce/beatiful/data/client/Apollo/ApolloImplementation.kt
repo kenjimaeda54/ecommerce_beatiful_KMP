@@ -1,11 +1,10 @@
-package com.ecommerce.beatiful.data.client
+package com.ecommerce.beatiful.data.client.Apollo
 
 import Ecommerce_Beatiful.shared.BuildConfig
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.ApolloRequest
 import com.apollographql.apollo.api.ApolloResponse
 import com.apollographql.apollo.api.Operation
-import com.apollographql.apollo.api.http.HttpHeader
 import com.apollographql.apollo.api.http.HttpRequest
 import com.apollographql.apollo.api.http.HttpResponse
 import com.apollographql.apollo.interceptor.ApolloInterceptor

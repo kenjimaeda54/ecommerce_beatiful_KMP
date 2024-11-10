@@ -1,4 +1,4 @@
-package com.ecommerce.beatiful.data.client
+package com.ecommerce.beatiful.data.client.Apollo
 
 import com.apollographql.apollo.ApolloClient
 

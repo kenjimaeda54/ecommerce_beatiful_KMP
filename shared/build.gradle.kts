@@ -33,9 +33,10 @@ kotlin {
     val properties = Properties()
     properties.load(project.rootProject.file("local.properties").inputStream())
     val apiKey = properties.getProperty("API_KEY")
-
+    val supabaseKey = properties.getProperty("SUPABASE_KEY")
     buildConfig {
         buildConfigField("String", "API_KEY", "\"$apiKey\"")
+        buildConfigField("String", "SUPABASE_KEY", "\"$supabaseKey\"")
     }
 
 
@@ -60,6 +61,8 @@ kotlin {
             implementation(libs.sql.coroutines.extensions)
             implementation(libs.kotlinx.serialization)
             implementation(libs.touchlab.stately.common)
+            implementation(project.dependencies.platform(libs.supabase.bom))
+            implementation(libs.supabase.auth)
 
         }
 
@@ -67,12 +70,14 @@ kotlin {
             implementation(libs.sql.native.driver)
             implementation(libs.touchlab.stately.isolate)
             implementation(libs.touchlab.stately.common)
+            implementation(libs.ktor.client.darwin)
         }
 
         androidMain.dependencies {
             implementation(libs.viewModel.ktx)
             implementation(libs.koin.android)
             implementation(libs.sql.android.driver)
+            implementation(libs.ktor.client.android)
         }
 
         commonTest.dependencies {
