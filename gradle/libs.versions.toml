@@ -1,6 +1,6 @@
 [versions]
 agp = "8.5.1"
-kotlin = "2.0.10"
+kotlin = "2.0.21"
 compose = "1.7.0-rc01"
 compose-material3 = "1.1.2"
 androidx-activityCompose = "1.9.1"
@@ -9,7 +9,7 @@ androidx-activityCompose = "1.9.1"
 view-model-ktx = "2.8.4"
 coroutines-ktx = "1.8.1"
 koin =  "3.5.6"
-touchlab-skia = "0.8.4"
+touchlab-skia = "0.9.3"
 apollo = "4.0.0"
 datetime = "0.6.1"
 sqdelight = "2.0.2"
@@ -23,6 +23,9 @@ statly-common = "2.0.5"
 config-build = "5.4.0"
 supabase = "3.0.1"
 ktor = "2.3.12"
+kotlinx-coroutines-test = "1.6.0"
+kotest = "5.8.0"
+mockk = "1.13.13"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -55,6 +58,10 @@ supabase-bom = {module = "io.github.jan-tennert.supabase:bom", version.ref = "su
 supabase-auth = {module = "io.github.jan-tennert.supabase:auth-kt", version.ref = "supabase" }
 ktor-client-darwin = {module = "io.ktor:ktor-client-darwin", version.ref = "ktor"}
 ktor-client-android = {module = "io.ktor:ktor-client-android", version.ref = "ktor"}
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
+koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
+
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -70,4 +77,5 @@ apollo = { id = "com.apollographql.apollo", version.ref = "apollo" }
 sqdelight = { id = "app.cash.sqldelight", version.ref = "sqdelight" }
 serialization = {id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serialization"}
 config-build = { id = "com.github.gmazzo.buildconfig", version.ref = "config-build" }
+kotest-multiplaform = { id = "io.kotest.multiplatform", version.ref = "kotest" }
 

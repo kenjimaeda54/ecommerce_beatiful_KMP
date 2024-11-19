@@ -1,7 +1,7 @@
-package com.ecommerce.beatiful.data.client.SupabaseClientImplementation
+package com.ecommerce.beatiful.data.client
 
 import Ecommerce_Beatiful.shared.BuildConfig
-import com.ecommerce.beatiful.data.client.SupabaseClient.SupabaseClient
+import com.ecommerce.beatiful.data.client.contracts.SupabaseClient
 import io.github.jan.supabase.auth.Auth
 import io.github.jan.supabase.createSupabaseClient
 

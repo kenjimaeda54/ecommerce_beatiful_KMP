@@ -1,13 +1,13 @@
 package com.ecommerce.beatiful.data.client
 
-import com.ecommerce.beatiful.data.client.SupabaseClient.SupabaseClient
+import com.ecommerce.beatiful.data.client.contracts.SupabaseClient
 import com.ecommerce.beatiful.util.DataOrException
 import io.github.jan.supabase.auth.OtpType
 import io.github.jan.supabase.auth.auth
 import io.github.jan.supabase.auth.providers.builtin.OTP
 
 
-class Supabase(private val supabaseClient: SupabaseClient) : SupabaseClient by supabaseClient {
+class SupabaseImplementaion(private val supabaseClient: SupabaseClient) : SupabaseClient by supabaseClient {
 
 
     suspend fun sendCodeOTP(userPhone: String): DataOrException<Boolean, Exception, Boolean> {

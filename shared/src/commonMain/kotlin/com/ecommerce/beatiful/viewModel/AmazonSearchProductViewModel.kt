@@ -13,8 +13,8 @@ import org.koin.core.component.inject
 
 class AmazonSearchProductViewModel: CoroutineViewModel(), KoinComponent {
     private val amazonSearchProductRepository: AmazonSearchProductRepository by inject()
-    private  var _amazonSearchProduct = MutableStateFlow< DataOrException<List<AmazonResultSerialization>,ApolloException, Boolean>>(DataOrException(null,null, false))
-    val  amazonSearchProduct: StateFlow<DataOrException<List<AmazonResultSerialization>,ApolloException, Boolean>> = _amazonSearchProduct
+    private  var _amazonSearchProduct = MutableStateFlow< DataOrException<List<AmazonResultSerialization>,String, Boolean>>(DataOrException(null,null, false))
+    val  amazonSearchProduct: StateFlow<DataOrException<List<AmazonResultSerialization>,String, Boolean>> = _amazonSearchProduct
 
     fun fetchAmazonResult(product: String,differenceMinutes: Int) {
         scope.launch {

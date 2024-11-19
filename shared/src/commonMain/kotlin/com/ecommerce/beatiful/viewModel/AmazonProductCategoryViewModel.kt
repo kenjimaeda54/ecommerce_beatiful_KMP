@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class AmazonProductCategoryViewModel : CoroutineViewModel(), KoinComponent {
+class AmazonProductCategoryViewModel: CoroutineViewModel(), KoinComponent {
     private val repository: AmazonProductByCategoryRepository by inject()
     private val _listProductsCategory =
         MutableStateFlow<List<AmazonProductCategoryModel>>(

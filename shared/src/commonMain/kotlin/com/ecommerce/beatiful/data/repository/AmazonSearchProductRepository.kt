@@ -1,7 +1,8 @@
 package com.ecommerce.beatiful.data.repository
 
 import com.apollographql.apollo.exception.ApolloException
-import com.ecommerce.beatiful.data.client.AmazonProduct
+import com.ecommerce.beatiful.data.client.AmazonProductImplementation
+import com.ecommerce.beatiful.data.client.contracts.AmazonProduct
 import com.ecommerce.beatiful.data.local.AmazonProductSearchResource
 import com.ecommerce.beatiful.data.model.AmazonResultSerialization
 import com.ecommerce.beatiful.data.model.toAmazonProductResult
@@ -17,7 +18,7 @@ class AmazonSearchProductRepository : KoinComponent {
     suspend fun fetchAmazonResult(
         product: String,
         differenceMinutes: Int
-    ): DataOrException<List<AmazonResultSerialization>, ApolloException,Boolean> {
+    ): DataOrException<List<AmazonResultSerialization>, String, Boolean> {
         val helper = Helpers()
         val amazonData = resource.getAmazonProductSearchData()
 
@@ -27,7 +28,11 @@ class AmazonSearchProductRepository : KoinComponent {
             if (data != null) {
                 resource.insertAmazonProductSearchData(data)
 
-                return    DataOrException(data.amazonProductSearchResults!!.productResults!!.results!!.map { it!!.toAmazonProductResult() }, null, false)
+                return DataOrException(
+                    data.amazonProductSearchResults!!.productResults!!.results!!.map { it!!.toAmazonProductResult() },
+                    null,
+                    false
+                )
             }
             return DataOrException(null, response.exception!!, false)
         }
@@ -42,10 +47,14 @@ class AmazonSearchProductRepository : KoinComponent {
             //uma maneira de nao precisa comparar se possui internet
             //caso der null no response e porque possivelmente nao conseguiu conexao por falha de internet
             //ja que possuii data no local eu retorno o local
-            if (data  != null) {
+            if (data != null) {
                 resource.deleteAmazonProductSearchData()
                 resource.insertAmazonProductSearchData(data)
-                return  DataOrException(data.amazonProductSearchResults!!.productResults!!.results!!.map { it!!.toAmazonProductResult() }, null, false)
+                return DataOrException(
+                    data.amazonProductSearchResults!!.productResults!!.results!!.map { it!!.toAmazonProductResult() },
+                    null,
+                    false
+                )
             }
             return DataOrException(amazonData.results, null, false)
         }

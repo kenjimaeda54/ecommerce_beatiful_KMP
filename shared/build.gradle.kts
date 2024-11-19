@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.plugin.sources.dependsOnClosure
 import java.util.Properties
 
 plugins {
@@ -19,6 +20,9 @@ plugins {
     //build config
     alias(libs.plugins.config.build)
 
+    //kotest
+    alias(libs.plugins.kotest.multiplaform)
+
 }
 
 kotlin {
@@ -38,8 +42,6 @@ kotlin {
         buildConfigField("String", "API_KEY", "\"$apiKey\"")
         buildConfigField("String", "SUPABASE_KEY", "\"$supabaseKey\"")
     }
-
-
 
     listOf(
         iosX64(),
@@ -63,7 +65,6 @@ kotlin {
             implementation(libs.touchlab.stately.common)
             implementation(project.dependencies.platform(libs.supabase.bom))
             implementation(libs.supabase.auth)
-
         }
 
         iosMain.dependencies {
@@ -82,10 +83,14 @@ kotlin {
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(kotlin("test-annotations-common"))
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.koin.test)
+
         }
+
     }
 }
-
 
 
 
@@ -118,7 +123,6 @@ apollo {
         }
     }
 }
-
 
 
 sqldelight {

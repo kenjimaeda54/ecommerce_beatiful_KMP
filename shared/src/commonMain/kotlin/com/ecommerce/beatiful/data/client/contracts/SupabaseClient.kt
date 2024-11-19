@@ -1,4 +1,4 @@
-package com.ecommerce.beatiful.data.client.SupabaseClient
+package com.ecommerce.beatiful.data.client.contracts
 
 import io.github.jan.supabase.SupabaseClient
 

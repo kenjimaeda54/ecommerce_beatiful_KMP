@@ -1,4 +1,4 @@
-package com.ecommerce.beatiful.data.client.Apollo
+package com.ecommerce.beatiful.data.client
 
 import Ecommerce_Beatiful.shared.BuildConfig
 import com.apollographql.apollo.ApolloClient
@@ -12,10 +12,12 @@ import com.apollographql.apollo.interceptor.ApolloInterceptorChain
 import com.apollographql.apollo.network.http.DefaultHttpEngine
 import com.apollographql.apollo.network.http.HttpInterceptor
 import com.apollographql.apollo.network.http.HttpInterceptorChain
+import com.ecommerce.beatiful.data.client.contracts.ApolloClientApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.onEach
 
-class ApolloImplementation() : IApolloClient {
+class ApolloClientApiImplementation() :
+   ApolloClientApi {
     private val apiKey = BuildConfig.API_KEY
 
     override val apollo: ApolloClient

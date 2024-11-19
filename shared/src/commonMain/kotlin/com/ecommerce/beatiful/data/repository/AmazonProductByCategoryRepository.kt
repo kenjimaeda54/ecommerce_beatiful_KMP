@@ -1,8 +1,7 @@
 package com.ecommerce.beatiful.data.repository
 
-import com.apollographql.apollo.exception.ApolloException
-import com.ecommerce.beatiful.data.client.AmazonProduct
-import com.ecommerce.beatiful.data.local.AmazonProductByCategoryResource
+import com.ecommerce.beatiful.data.client.contracts.AmazonProduct
+import com.ecommerce.beatiful.data.local.contracts.AmazonProductByCategoryResource
 import com.ecommerce.beatiful.data.model.AmazonProductCategoryModel
 import com.ecommerce.beatiful.data.model.toAmazonProductCategory
 import com.ecommerce.beatiful.util.DataOrException
@@ -14,7 +13,10 @@ class AmazonProductByCategoryRepository : KoinComponent {
     private val client: AmazonProduct by inject()
     private val resource: AmazonProductByCategoryResource by inject()
 
-    suspend fun fetchAmazonProductByCategory(categoryId: String, differenceMinutes: Int): DataOrException<AmazonProductCategoryModel, ApolloException, Boolean> {
+    suspend fun fetchAmazonProductByCategory(
+        categoryId: String,
+        differenceMinutes: Int
+    ): DataOrException<AmazonProductCategoryModel, String, Boolean> {
         val helper = Helpers()
         val amazonData = resource.getAmazonProductByCategory(categoryId)
 
