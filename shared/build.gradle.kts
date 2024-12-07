@@ -23,6 +23,40 @@ plugins {
     //kotest
     alias(libs.plugins.kotest.multiplaform)
 
+    //report test
+    jacoco
+
+}
+
+tasks.register("jacocoCoverageVerification", JacocoReport::class) {
+    dependsOn(tasks.withType(Test::class.java))
+
+    val buildDir = layout.buildDirectory
+
+    jacoco {
+        toolVersion = "0.8.12"
+        reportsDirectory = buildDir.dir("reports/jacoco")
+    }
+
+    reports {
+        xml.required = false
+        html.required = true
+    }
+    val coverageSourceDirs = arrayOf(
+        "src/commonMain",
+        "src/androidMain",
+        "src/iosMain",
+    )
+    val classFiles = buildDir.dir("classes/kotlin/jvm").get().asFile.walkBottomUp().toSet()
+
+    classDirectories.setFrom(classFiles)
+    sourceDirectories.setFrom(files(coverageSourceDirs))
+
+    buildDir.files("jacoco/jvmTest.exec").let {
+        executionData.setFrom(it)
+    }
+
+
 }
 
 kotlin {
@@ -86,6 +120,10 @@ kotlin {
             implementation(kotlin("test-annotations-common"))
             implementation(libs.kotlinx.coroutines.test)
             implementation(libs.koin.test)
+
+            tasks.withType<Test> {
+                finalizedBy(tasks.withType(JacocoReport::class.java))
+            }
 
         }
 

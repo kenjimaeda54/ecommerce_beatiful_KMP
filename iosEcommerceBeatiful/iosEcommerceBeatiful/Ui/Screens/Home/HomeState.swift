@@ -14,16 +14,16 @@ class HomeState: ObservableObject {
 	@Published var loadingState: LoadingState = .none
 	private var viewModel  = AmazonProductCategoryViewModel()
 	var productsByCategory: [AmazonProductCategoryModel] = []
-	
+
 	func getProduct(id: String) async {
 		loadingState = .loading
 		viewModel.getProductByCategory(categoryId: id, differenceMinutes: 15)
 		for await result in viewModel.listProductsCategory {
-			
+
 			productsByCategory = result
 			loadingState = .none
-			
+
 		}
-		
+
 	}
 }
