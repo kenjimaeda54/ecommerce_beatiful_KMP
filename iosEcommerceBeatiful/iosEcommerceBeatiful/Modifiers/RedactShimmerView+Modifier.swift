@@ -13,12 +13,12 @@ import SwiftUI
 
 public struct RedactAndShimmerView: ViewModifier {
 	private let condition: Bool
-
+    
 	init(condition: Bool) {
 		self.condition = condition
 	}
 
-	public func body(content: Content) -> some View {
+    public func body(content: Self.Content) -> some View {
 		if condition {
 			content
 				.redacted(reason: .placeholder)
