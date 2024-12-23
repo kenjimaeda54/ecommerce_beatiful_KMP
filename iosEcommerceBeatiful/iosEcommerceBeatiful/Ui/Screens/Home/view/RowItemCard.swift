@@ -47,6 +47,7 @@ struct RowItemCard: View {
                             
                         }else {
                             renderImage()
+                                .accessibilityIdentifier(accesibility_Image_Empty_In_Row_Item_Card)
                         }
                     }
                     .padding(5)
@@ -61,6 +62,7 @@ struct RowItemCard: View {
                             .lineLimit(3)
                             .frame(minHeight: 90)
                             .fixedSize(horizontal: false, vertical: true)
+                            .accessibilityIdentifier(product.title)
                         Text(product.price)
                             .font(Font.custom(FontsApp.openSansBold, size: 17))
                             .foregroundStyle(Colors.black)

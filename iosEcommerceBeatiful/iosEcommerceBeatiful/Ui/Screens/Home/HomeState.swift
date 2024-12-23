@@ -14,16 +14,27 @@ class HomeState: ObservableObject {
 	@Published var loadingState: LoadingState = .none
 	private var viewModel  = AmazonProductCategoryViewModel()
 	var productsByCategory: [AmazonProductCategoryModel] = []
+    let arguments = ProcessInfo.processInfo.environment["ENV"]
+
 
 	func getProduct(id: String) async {
 		loadingState = .loading
-		viewModel.getProductByCategory(categoryId: id, differenceMinutes: 15)
-		for await result in viewModel.listProductsCategory {
-
-			productsByCategory = result
-			loadingState = .none
-
-		}
-
+        arguments == "TEST" ?  await getMockProducts() : await getRealProducts(id: id)
 	}
+
+    func getMockProducts() async {
+        productsByCategory = mockAmazonProductCategory
+    }
+
+
+    func getRealProducts(id: String) async {
+
+        viewModel.getProductByCategory(categoryId: id, differenceMinutes: 15)
+        for await result in viewModel.listProductsCategory {
+
+            productsByCategory = result
+            loadingState = .none
+
+        }
+    }
 }

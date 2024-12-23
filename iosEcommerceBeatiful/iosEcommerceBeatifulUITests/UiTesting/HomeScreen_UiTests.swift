@@ -8,17 +8,17 @@
 
 @testable import iosEcommerceBeatiful
 import XCTest
+import SwiftUI
 
 final class HomeScreen_UiTests: XCTestCase {
     private var app: XCUIApplication!
     private var UIs: ContentViewUi!
     
-    
-    
     override func  setUpWithError() throws {
         app = XCUIApplication()
         UIs = ContentViewUi(app: app)
         continueAfterFailure  = false
+        app.launchEnvironment = ["ENV": "TEST"]
         app.launch()
     }
     
@@ -27,13 +27,12 @@ final class HomeScreen_UiTests: XCTestCase {
         app = nil
     }
     
-    
     func testeShouldShowsTheCategoriesCorrectly() {
         let item = UIs.taskListCategoriesHome
         XCTAssertTrue(item.waitForExistence(timeout: 2))
         
         
-        XCTAssertEqual(item.cells.count, 6)
+        XCTAssertEqual(item.cells.count, 4)
         XCTAssertTrue(UIs.taskStaticTextCategory.exists)
     }
     
@@ -55,7 +54,7 @@ final class HomeScreen_UiTests: XCTestCase {
     
     
     //para testar scroll automatico
-    //o titulo vai estar escccondido por iisso primerio garanto com
+    //o titulo vai estar escondido por isso primerio garanto com
     // XCTAssertFalse(title.waitForExistence(timeout: 2)) so apos scrollar que vai existir por isso
     // XCTAssertTrue(title.waitForExistence(timeout: 2))
     //dai havia tanto eletronicos na list horizontal acima como na lista vertical
@@ -72,8 +71,6 @@ final class HomeScreen_UiTests: XCTestCase {
         XCTAssertTrue(title.waitForExistence(timeout: 2))
         
     }
-    
-    
     
 }
 

@@ -118,7 +118,7 @@ struct HomeScreen: View {
                                                             //por a lista so aparecer conteudo conforme esta na tela posso fazer assim
                                                             //conteudo nao mostra de uma vez
                                                         }
-                                                        
+                                                    
                                                 }
                                                 
                                             }
