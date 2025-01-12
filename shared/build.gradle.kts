@@ -28,36 +28,41 @@ plugins {
 
 }
 
-tasks.register("jacocoCoverageVerification", JacocoReport::class) {
-    dependsOn(tasks.withType(Test::class.java))
 
-    val buildDir = layout.buildDirectory
+tasks.register<JacocoReport>("jacocoCoverageVerification") {
+    dependsOn(tasks.withType<Test>())
 
-    jacoco {
-        toolVersion = "0.8.12"
-        reportsDirectory = buildDir.dir("reports/jacoco")
-    }
 
     reports {
-        xml.required = false
-        html.required = true
+        html.required.set(true)
+        xml.required.set(false)
+        csv.required.set(false)
+        html.outputLocation.set(layout.buildDirectory.dir("reports/jacoco/shared"))
     }
-    val coverageSourceDirs = arrayOf(
-        "src/commonMain",
-        "src/androidMain",
-        "src/iosMain",
+
+    classDirectories.setFrom(
+        fileTree("${layout.buildDirectory.get()}/tmp/kotlin-classes/debug") {
+            exclude("**/R.class")
+            exclude("**/R\$*.class")
+            exclude("**/BuildConfig.*")
+            exclude("**/*\$Creator.*")
+        }
     )
-    val classFiles = buildDir.dir("classes/kotlin/jvm").get().asFile.walkBottomUp().toSet()
 
-    classDirectories.setFrom(classFiles)
-    sourceDirectories.setFrom(files(coverageSourceDirs))
+    sourceDirectories.setFrom(
+        files(
+            "src/commonMain/kotlin",
+            "src/androidMain/kotlin"
+        )
+    )
 
-    buildDir.files("jacoco/jvmTest.exec").let {
-        executionData.setFrom(it)
-    }
-
-
+    executionData.setFrom(
+        files("${layout.buildDirectory.get()}/jacoco/testDebugUnitTest.exec")
+    )
 }
+
+
+
 
 kotlin {
     androidTarget {
@@ -122,7 +127,7 @@ kotlin {
             implementation(libs.koin.test)
 
             tasks.withType<Test> {
-                finalizedBy(tasks.withType(JacocoReport::class.java))
+                finalizedBy(tasks.named("jacocoCoverageVerification"))
             }
 
         }

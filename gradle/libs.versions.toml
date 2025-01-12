@@ -25,7 +25,12 @@ supabase = "3.0.1"
 ktor = "2.3.12"
 kotlinx-coroutines-test = "1.6.0"
 kotest = "5.8.0"
-mockk = "1.13.13"
+test-runner= "1.1.2"
+test-orchestrator= "1.1.1"
+test-ext = "1.1.1"
+ui-test-junit4-android = "1.7.6"
+test-manifest = "1.0.0"
+
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -60,8 +65,11 @@ ktor-client-darwin = {module = "io.ktor:ktor-client-darwin", version.ref = "ktor
 ktor-client-android = {module = "io.ktor:ktor-client-android", version.ref = "ktor"}
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines-test" }
 koin-test = { module = "io.insert-koin:koin-test", version.ref = "koin" }
-
-
+test-runner = {module = "androidx.test:runner", version.ref  = "test-runner"}
+test-orchestrator = {module = "androidx.test:orchestrator", version.ref  = "test-orchestrator"}
+test-ext = {module = "androidx.test.ext:junit", version.ref  = "test-ext"}
+androidx-ui-test-junit4-android = { module = "androidx.compose.ui:ui-test-junit4-android",  version.ref = "ui-test-junit4-android" }
+test-manifest = {module = "androidx.compose.ui:ui-test-manifest", version.ref  = "test-manifest"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

@@ -1,10 +1,10 @@
-package mocks
+package com.ecommerce.beatiful.mocks
 
 import com.ecommerce.beatiful.AmazonProductByCategoryQuery
 import com.ecommerce.beatiful.AmazonProductSearchQuery
 import com.ecommerce.beatiful.data.client.contracts.AmazonProduct
 import com.ecommerce.beatiful.util.DataOrException
-import utils.IdsProductsCategory
+import com.ecommerce.beatiful.util.IdsProductsCategory
 
 
 class FakeAmazonProductImplementation : AmazonProduct {
@@ -66,7 +66,7 @@ class FakeAmazonProductImplementation : AmazonProduct {
             val data = AmazonProductByCategoryQuery.Data(
                 amazonProductCategory = AmazonProductByCategoryQuery.AmazonProductCategory(
                     name = "Mochilas em geral",
-                    breadcrumbPath = `BREADCRUMB_PATH`,
+                    breadcrumbPath = BREADCRUMB_PATH,
                     id = IdsProductsCategory.BACKPACK.value,
                     productResults = AmazonProductByCategoryQuery.ProductResults(
                         results = listOf(
@@ -99,7 +99,7 @@ class FakeAmazonProductImplementation : AmazonProduct {
             } else AmazonProductByCategoryQuery.Data(
                 amazonProductCategory = AmazonProductByCategoryQuery.AmazonProductCategory(
                     name = "Mochilas em geral",
-                    breadcrumbPath = `BREADCRUMB_PATH`,
+                    breadcrumbPath = BREADCRUMB_PATH,
                     id = IdsProductsCategory.BACKPACK.value,
                     productResults = AmazonProductByCategoryQuery.ProductResults(
                         results = listOf()
@@ -111,7 +111,7 @@ class FakeAmazonProductImplementation : AmazonProduct {
     }
 
     companion object {
-        const val `BREADCRUMB_PATH` = "Mochilas"
+        const val BREADCRUMB_PATH = "Mochilas"
     }
 
 }

@@ -14,7 +14,7 @@ import com.ecommerce.beatiful.viewModel.AmazonProductCategoryViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
-import mocks.FakeAmazonProductImplementation
+import com.ecommerce.beatiful.mocks.FakeAmazonProductImplementation
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
 import kotlin.test.Test
@@ -23,15 +23,15 @@ import kotlin.test.BeforeTest
 import kotlinx.coroutines.test.runCurrent
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
-import mocks.FakeAmazonProductCategoryResource
-import mocks.FakeAmazonProductCategoryResource.Companion.BREADCRUMB_PATH_FROM_DATABASE_BACKPACKS
-import mocks.FakeAmazonProductCategoryResource.Companion.BREADCRUMB_PATH_FROM_DATABASE_CLEANING
-import mocks.FakeAmazonProductImplementation.Companion.`BREADCRUMB_PATH`
+import com.ecommerce.beatiful.mocks.FakeAmazonProductCategoryResource
+import com.ecommerce.beatiful.mocks.FakeAmazonProductCategoryResource.Companion.BREADCRUMB_PATH_FROM_DATABASE_BACKPACKS
+import com.ecommerce.beatiful.mocks.FakeAmazonProductCategoryResource.Companion.BREADCRUMB_PATH_FROM_DATABASE_CLEANING
+import com.ecommerce.beatiful.mocks.FakeAmazonProductImplementation.Companion.`BREADCRUMB_PATH`
 import org.koin.core.context.stopKoin
 import org.koin.dsl.binds
 import org.koin.test.get
 import org.koin.test.inject
-import utils.IdsProductsCategory
+import com.ecommerce.beatiful.util.IdsProductsCategory
 import kotlin.test.AfterTest
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -70,7 +70,6 @@ class AmazonProductCategoryViewModelTest : KoinTest {
             )
         )
     )
-
 
     private val testModule = module {
         //precisa todos ser koinComponent

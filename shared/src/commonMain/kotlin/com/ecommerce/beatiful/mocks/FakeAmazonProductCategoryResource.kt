@@ -1,4 +1,4 @@
-package mocks
+package com.ecommerce.beatiful.mocks
 
 import com.ecommerce.beatiful.AmazonProductByCategoryQuery
 import com.ecommerce.beatiful.data.local.contracts.AmazonProductByCategoryResource
@@ -6,8 +6,8 @@ import com.ecommerce.beatiful.data.model.AmazonProductCategoryModel
 import com.ecommerce.beatiful.data.model.AmazonResultSerialization
 import com.ecommerce.beatiful.data.model.AmazonSellerSerialization
 import com.ecommerce.beatiful.data.model.toAmazonProductResult
+import com.ecommerce.beatiful.util.IdsProductsCategory
 import kotlinx.datetime.Clock
-import utils.IdsProductsCategory
 
 class FakeAmazonProductCategoryResource : AmazonProductByCategoryResource {
     private var haveData = false
@@ -54,13 +54,13 @@ class FakeAmazonProductCategoryResource : AmazonProductByCategoryResource {
 
     override fun insertAmazonProductByCategory(data: AmazonProductByCategoryQuery.Data) {
         val amazonResultSerialization =
-            data!!.amazonProductCategory!!.productResults!!.results!!.map {
+            data.amazonProductCategory!!.productResults!!.results!!.map {
                 it!!.toAmazonProductResult()
             }
         val amazonProductCategoryModel = AmazonProductCategoryModel(
-            id = data.amazonProductCategory!!.id!!,
-            name = data.amazonProductCategory!!.name!!,
-            breadcrumbPath = data.amazonProductCategory!!.breadcrumbPath!!,
+            id = data.amazonProductCategory.id!!,
+            name = data.amazonProductCategory.name!!,
+            breadcrumbPath = data.amazonProductCategory.breadcrumbPath!!,
             createAt = currentTime,
             results = amazonResultSerialization
         )

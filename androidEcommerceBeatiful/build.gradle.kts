@@ -2,7 +2,47 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.compose.compiler)
+
+    //jacoco
+    jacoco
 }
+
+//abaixo como fazer teste apenas para androidTest que e o instrument test
+tasks.register<JacocoReport>("jacocoCoverageVerification") {
+    dependsOn("createDebugCoverageReport")
+
+    reports {
+        html.required.set(true)
+        xml.required.set(false)
+        csv.required.set(false)
+        html.outputLocation.set(layout.buildDirectory.dir("reports/jacoco/android"))
+    }
+
+    classDirectories.setFrom(
+        fileTree("${layout.buildDirectory.get()}/tmp/kotlin-classes/debug") {
+            //preciso incluir quais classes serao feito o cover
+            include("**/com/ecommerce/beatiful/android/ui/screens/**")
+            exclude("**/R.class")
+            exclude("**/R\$*.class")
+            exclude("**/BuildConfig.*")
+            exclude("**/*\$Creator.*")
+        }
+    )
+
+    sourceDirectories.setFrom(
+        files(
+                "src/main/java",
+        )
+    )
+
+    executionData.setFrom(
+        fileTree(layout.buildDirectory) {
+            include("outputs/code_coverage/debugAndroidTest/connected/**/*.ec")
+        }
+
+    )
+}
+
 
 android {
     namespace = "com.ecommerce.beatiful.android"
@@ -13,6 +53,11 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
+
+        //test
+        //java/InstrumentationTestRunner.kt
+        testInstrumentationRunner  = "com.ecommerce.beatiful.android.InstrumentationTestRunner"
+
     }
     buildFeatures {
         compose = true
@@ -26,6 +71,13 @@ android {
         getByName("release") {
             isMinifyEnabled = false
         }
+
+        //paara ativar coverage de teste de instruments
+        //soa testes de ui
+        debug {
+            enableAndroidTestCoverage = true
+        }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -52,11 +104,21 @@ dependencies {
     implementation(libs.koin.androidx.core)
     implementation(libs.koin.android)
 
-
     //lottie
     implementation(libs.lottie.compose)
 
     //coil
     implementation(libs.coil.image)
+
+    //test instrumentation
+    androidTestImplementation(libs.test.runner)
+    androidTestImplementation(libs.test.ext)
+    androidTestUtil(libs.test.orchestrator)
+    implementation(libs.androidx.ui.test.junit4.android)
+    debugImplementation(libs.test.manifest)
+
+    tasks.withType<Test> {
+        finalizedBy(tasks.named("jacocoCoverageVerification"))
+    }
 
 }

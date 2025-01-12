@@ -1,4 +1,4 @@
-package utils
+package com.ecommerce.beatiful.util
 
 enum class IdsProductsCategory(val value: String) {
     BACKPACK("360832011"),
