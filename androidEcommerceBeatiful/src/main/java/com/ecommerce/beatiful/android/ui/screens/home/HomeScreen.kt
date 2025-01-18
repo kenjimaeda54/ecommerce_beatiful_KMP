@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -49,8 +50,10 @@ import com.ecommerce.beatiful.viewModel.AmazonProductCategoryViewModel
 import kotlinx.coroutines.launch
 
 
-
-const val TITLE_PRODUCT = "TEST_ITEMS_LIST_PRODUCTS"
+const val BACKPACK_ICON = "Back Icon"
+const val CLEAN_ICON = "Clean Icon"
+const val VIDEO_GAMES_ICON = "Video Games Icon"
+const val ELECTRONICS_ICON = "Electronic Icons"
 
 @Composable
 fun HomeScreen() {
@@ -119,7 +122,7 @@ fun HomeScreen() {
                 Row(
                     Modifier
                         .horizontalScroll(rememberScrollState())
-                        .padding(start = 10.dp),
+                        .padding(start = 10.dp).testTag(TestTags.CategoryButtonsRow.name),
                     horizontalArrangement = Arrangement.spacedBy(25.dp)
                 ) {
                     categoryMap.entries.forEachIndexed { index, (_, key) ->
@@ -129,7 +132,7 @@ fun HomeScreen() {
                                     stateLazy.animateScrollToItem(index)
                                 }
 
-                            },
+                            }.testTag("${TestTags.CategoryButtonsRow.name}_${categoryMap.values.toList()[index]}"),
                             horizontalAlignment = Alignment.CenterHorizontally,
                             verticalArrangement = Arrangement.Center
 
@@ -150,28 +153,28 @@ fun HomeScreen() {
                                     "Mochilas" -> Icon(
                                         modifier = Modifier.size(30.dp),
                                         painter = painterResource(id = com.ecommerce.beatiful.android.R.drawable.backpaback),
-                                        contentDescription = null,
+                                        contentDescription = BACKPACK_ICON,
                                         tint = MaterialTheme.colorScheme.tertiary
                                     )
 
                                     "Limpeza" -> Icon(
                                         modifier = Modifier.size(30.dp),
                                         painter = painterResource(id = com.ecommerce.beatiful.android.R.drawable.clean),
-                                        contentDescription = null,
+                                        contentDescription = CLEAN_ICON,
                                         tint = MaterialTheme.colorScheme.tertiary
                                     )
 
                                     "Video Games" -> Icon(
                                         modifier = Modifier.size(30.dp),
                                         painter = painterResource(id = com.ecommerce.beatiful.android.R.drawable.game),
-                                        contentDescription = null,
+                                        contentDescription = VIDEO_GAMES_ICON,
                                         tint = MaterialTheme.colorScheme.tertiary
                                     )
 
                                     "Eletronicos" -> Icon(
                                         modifier = Modifier.size(30.dp),
                                         painter = painterResource(id = com.ecommerce.beatiful.android.R.drawable.eletronic),
-                                        contentDescription = null,
+                                        contentDescription = ELECTRONICS_ICON,
                                         tint = MaterialTheme.colorScheme.tertiary
                                     )
 
@@ -207,10 +210,7 @@ fun HomeScreen() {
                         Text(
                             categoryMap[id] ?: "",
                             modifier = Modifier
-                                .padding(start = 10.dp, top = 25.dp)
-                                .testTag(
-                                    TITLE_PRODUCT
-                                ),
+                                .padding(start = 10.dp, top = 25.dp),
                             fontFamily = fontsOpenSans,
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.tertiary.copy(0.7f)
@@ -218,6 +218,7 @@ fun HomeScreen() {
 
                         if (findProduct?.results?.isEmpty() == true) {
                             LazyRow(
+                                modifier = Modifier.testTag(TestTags.ShimmerLoading.name),
                                 horizontalArrangement = Arrangement.spacedBy(15.dp),
                                 contentPadding = PaddingValues(start = 10.dp)
                             ) {
@@ -226,6 +227,9 @@ fun HomeScreen() {
                                         modifier = Modifier
                                             .height(150.dp)
                                             .width(120.dp)
+                                            .testTag(
+                                                TestTags.TestShimmerItems.name
+                                            )
                                             .shimmerBackground(
                                                 shape = RoundedCornerShape(10.dp)
                                             )
@@ -236,6 +240,7 @@ fun HomeScreen() {
                             }
                         } else {
                             LazyRow(
+                                modifier = Modifier.testTag(TestTags.RowItemsProducts.name),
                                 horizontalArrangement = Arrangement.spacedBy(15.dp),
                                 contentPadding = PaddingValues(start = 10.dp)
                             ) {

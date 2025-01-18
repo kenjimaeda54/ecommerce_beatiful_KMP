@@ -37,7 +37,44 @@ class FakeAmazonProductCategoryResource : AmazonProductByCategoryResource {
                     url = "https://github.com/kenjimaead5.png"
                 )
             )
-        )
+        ),
+        AmazonProductCategoryModel(
+            name = "Limpeza",
+            breadcrumbPath = BREADCRUMB_PATH_FROM_DATABASE_BACKPACKS,
+            id = IdsProductsCategory.BACKPACK.value,
+            createAt = currentTime,
+            results = mutableListOf(
+
+            )
+        ),
+        AmazonProductCategoryModel(
+            name = "Video Games",
+            breadcrumbPath = BREADCRUMB_PATH_FROM_DATABASE_BACKPACKS,
+            id = IdsProductsCategory.BACKPACK.value,
+            createAt = currentTime,
+            results = mutableListOf(
+
+            )
+        ),
+        AmazonProductCategoryModel(
+            name = "Eletronicos",
+            breadcrumbPath = BREADCRUMB_PATH_FROM_DATABASE_BACKPACKS,
+            id = IdsProductsCategory.BACKPACK.value,
+            createAt = currentTime,
+            results = mutableListOf(
+
+            )
+        ),
+        AmazonProductCategoryModel(
+            name = "Saude",
+            breadcrumbPath = BREADCRUMB_PATH_FROM_DATABASE_BACKPACKS,
+            id = IdsProductsCategory.BACKPACK.value,
+            createAt = currentTime,
+            results = mutableListOf(
+
+            )
+        ),
+
     )
 
     fun setHaveData(value: Boolean) {

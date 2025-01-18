@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,6 +39,7 @@ import androidx.compose.ui.zIndex
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.ecommerce.beatiful.android.ui.theme.fontsOpenSans
+import com.ecommerce.beatiful.android.util.TestTags
 import com.ecommerce.beatiful.data.model.AmazonResultSerialization
 
 
@@ -63,7 +65,7 @@ fun RowCategoryMap(modifier: Modifier = Modifier,item: AmazonResultSerialization
 
             ) {
                 AsyncImage(
-                    modifier = Modifier.fillMaxSize(0.9f),
+                    modifier = Modifier.fillMaxSize(0.9f).testTag(TestTags.ImageRowCategoryItems.name),
                     model = ImageRequest.Builder(LocalContext.current).data(item.imageUrls?.get(0))
                         .crossfade(true).build(), contentDescription = "Image url",
                     contentScale = ContentScale.FillBounds
