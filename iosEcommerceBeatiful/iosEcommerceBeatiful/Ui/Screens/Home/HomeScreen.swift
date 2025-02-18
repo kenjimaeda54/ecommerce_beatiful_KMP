@@ -135,6 +135,7 @@ struct HomeScreen: View {
                             .listRowInsets(.init(top:0, leading: 10, bottom: 0, trailing: 0))
                             .listRowBackground(Color.clear)
                         }
+                        .padding(.bottom,25)
                         .accessibilityIdentifier(acesssibility_List_Categories)
                         .listStyle(.plain)
                         .scrollContentBackground(.hidden)
@@ -161,7 +162,7 @@ struct HomeScreen: View {
         .task {
             categoryMap.forEach { item   in
                 Task {
-                    await homeState.getProduct(id: item.id)
+                    await homeState.getProducts(id: item.id)
                 }
                 
             }

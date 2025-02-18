@@ -8,9 +8,9 @@ import com.ecommerce.beatiful.data.local.AmazonProductByCategoryResourceImplemen
 import com.ecommerce.beatiful.data.local.contracts.AmazonProductByCategoryResource
 import com.ecommerce.beatiful.di.coreDatabase
 import com.ecommerce.beatiful.di.driverSQLModule
+import com.ecommerce.beatiful.di.initKoin
 import com.ecommerce.beatiful.di.repositoryModule
 import com.ecommerce.beatiful.di.viewModelModule
-import com.ecommerce.beatiful.viewModel.AmazonProductCategoryViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -71,33 +71,11 @@ class AmazonProductCategoryViewModelTest : KoinTest {
         )
     )
 
-    private val testModule = module {
-        //precisa todos ser koinComponent
-        //preciso que os dados locais tenham a interface implementada
-        single<AmazonProduct> {
-            FakeAmazonProductImplementation()
-        } binds arrayOf(FakeAmazonProductImplementation::class, AmazonProductImplementation::class)
 
-        single<AmazonProductByCategoryResource> {
-            FakeAmazonProductCategoryResource()
-        } binds arrayOf(
-            FakeAmazonProductCategoryResource::class,
-            AmazonProductByCategoryResourceImplementation::class
-        ) //repositorio que consome o ResouceImplmentation tem que ter a intefce
-        // AmazonProductByCategoryResource no inject()
-    }
 
     @BeforeTest
     fun setUp() {
-        startKoin {
-            modules(
-                viewModelModule,
-                repositoryModule,
-                driverSQLModule,
-                coreDatabase,
-                testModule
-            )
-        }
+        initKoin(true)
         Dispatchers.setMain(StandardTestDispatcher())
     }
 

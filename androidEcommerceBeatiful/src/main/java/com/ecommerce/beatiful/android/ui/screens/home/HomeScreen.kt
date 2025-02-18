@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -46,7 +45,7 @@ import com.ecommerce.beatiful.android.ui.screens.home.view.RowCategoryMap
 import com.ecommerce.beatiful.android.ui.theme.fontsOpenSans
 import com.ecommerce.beatiful.android.util.TestTags
 import com.ecommerce.beatiful.android.util.categoryMap
-import com.ecommerce.beatiful.viewModel.AmazonProductCategoryViewModel
+import com.ecommerce.beatiful.viewModel.HomeViewModel
 import kotlinx.coroutines.launch
 
 
@@ -57,7 +56,7 @@ const val ELECTRONICS_ICON = "Electronic Icons"
 
 @Composable
 fun HomeScreen() {
-    val viewModel = viewModel<AmazonProductCategoryViewModel>()
+    val viewModel = viewModel<HomeViewModel>()
     val allProductsList by viewModel.listProductsCategory.collectAsState()
     val coroutineScope = rememberCoroutineScope()
     val stateLazy = rememberLazyListState()
@@ -89,6 +88,7 @@ fun HomeScreen() {
 
             ) {
                 CustomTextField(
+                    modifier = Modifier.testTag(TestTags.SearchInput.name),
                     placeHolder = "Procurar na loja toda",
                     value = product, onValueChange = {
                         product = it

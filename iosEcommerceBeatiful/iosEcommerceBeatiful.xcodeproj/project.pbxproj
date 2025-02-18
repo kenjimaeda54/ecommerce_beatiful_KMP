@@ -26,7 +26,6 @@
 		817E17702CBD60DE00536D9B /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817E176D2CBD60DE00536D9B /* OpenSans-Medium.ttf */; };
 		817E17712CBD60DE00536D9B /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817E176E2CBD60DE00536D9B /* OpenSans-Regular.ttf */; };
 		817E17732CBD60FE00536D9B /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 817E17722CBD60FE00536D9B /* OpenSans-SemiBold.ttf */; };
-		817F05842D1315B10008477A /* AmazonProductCategoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817F05832D1315A40008477A /* AmazonProductCategoryMock.swift */; };
 		81B7EA7A2CB9F8F400FB864F /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B7EA792CB9F8EB00FB864F /* Fonts.swift */; };
 		81B7EA7C2CB9F96E00FB864F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81B7EA7B2CB9F96900FB864F /* Colors.swift */; };
 		81BFE4FC2CD24B4100945EC4 /* RedactShimmerView+Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81BFE4FB2CD24B3300945EC4 /* RedactShimmerView+Modifier.swift */; };
@@ -83,7 +82,6 @@
 		817E176D2CBD60DE00536D9B /* OpenSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Medium.ttf"; sourceTree = "<group>"; };
 		817E176E2CBD60DE00536D9B /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		817E17722CBD60FE00536D9B /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
-		817F05832D1315A40008477A /* AmazonProductCategoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmazonProductCategoryMock.swift; sourceTree = "<group>"; };
 		81B7EA792CB9F8EB00FB864F /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		81B7EA7B2CB9F96900FB864F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		81BFE4FB2CD24B3300945EC4 /* RedactShimmerView+Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RedactShimmerView+Modifier.swift"; sourceTree = "<group>"; };
@@ -146,7 +144,6 @@
 		7555FF7D242A565900829871 /* iosEcommerceBeatiful */ = {
 			isa = PBXGroup;
 			children = (
-				81A72A7A2D1325E80091C23A /* Mocks */,
 				81BFE4FA2CD24B2900945EC4 /* Modifiers */,
 				816665752CC880AC001CC200 /* Environment */,
 				816665712CC87FA2001CC200 /* Navigation */,
@@ -244,14 +241,6 @@
 				817D87C22CBA84BC007D27A3 /* HomeScreen.swift */,
 			);
 			path = Home;
-			sourceTree = "<group>";
-		};
-		81A72A7A2D1325E80091C23A /* Mocks */ = {
-			isa = PBXGroup;
-			children = (
-				817F05832D1315A40008477A /* AmazonProductCategoryMock.swift */,
-			);
-			path = Mocks;
 			sourceTree = "<group>";
 		};
 		81B7EA2D2CB9F6C000FB864F /* Ui */ = {
@@ -464,7 +453,6 @@
 				8166657D2CC882AC001CC200 /* CartScreen.swift in Sources */,
 				8124D9E72CEE40D9008F6968 /* accesibilityTags.swift in Sources */,
 				8166657A2CC8828B001CC200 /* FavoritesScreen.swift in Sources */,
-				817F05842D1315B10008477A /* AmazonProductCategoryMock.swift in Sources */,
 				81B7EA7A2CB9F8F400FB864F /* Fonts.swift in Sources */,
 				81C3AE812CBA9247007867A6 /* categoryMap.swift in Sources */,
 			);

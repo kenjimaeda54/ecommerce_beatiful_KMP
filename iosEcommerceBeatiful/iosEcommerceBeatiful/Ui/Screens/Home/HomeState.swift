@@ -12,23 +12,11 @@ import shared
 @MainActor
 class HomeState: ObservableObject {
 	@Published var loadingState: LoadingState = .none
-	private var viewModel  = AmazonProductCategoryViewModel()
+    private var viewModel  = HomeViewModel()
 	var productsByCategory: [AmazonProductCategoryModel] = []
-    let arguments = ProcessInfo.processInfo.environment["ENV"]
 
-
-	func getProduct(id: String) async {
-		loadingState = .loading
-        arguments == "TEST" ?  await getMockProducts() : await getRealProducts(id: id)
-	}
-
-    func getMockProducts() async {
-        productsByCategory = mockAmazonProductCategory
-    }
-
-
-    func getRealProducts(id: String) async {
-
+    func getProducts(id: String) async {
+        loadingState = .loading
         viewModel.getProductByCategory(categoryId: id, differenceMinutes: 15)
         for await result in viewModel.listProductsCategory {
 

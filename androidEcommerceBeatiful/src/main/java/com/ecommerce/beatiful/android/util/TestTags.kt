@@ -7,5 +7,6 @@ enum class TestTags {
     CategoryButtonsRow,
     ShimmerLoading,
     TestShimmerItems,
+    SearchInput
 
 }

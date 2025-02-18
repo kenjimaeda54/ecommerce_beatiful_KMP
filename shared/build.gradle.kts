@@ -62,7 +62,9 @@ tasks.register<JacocoReport>("jacocoCoverageVerification") {
 }
 
 
-
+tasks.withType<Test> {
+    finalizedBy(tasks.named("jacocoCoverageVerification"))
+}
 
 kotlin {
     androidTarget {
@@ -126,9 +128,7 @@ kotlin {
             implementation(libs.kotlinx.coroutines.test)
             implementation(libs.koin.test)
 
-            tasks.withType<Test> {
-                finalizedBy(tasks.named("jacocoCoverageVerification"))
-            }
+
 
         }
 

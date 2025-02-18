@@ -39,6 +39,7 @@ import com.ecommerce.beatiful.android.ui.theme.fontsOpenSans
 )
 @Composable
 fun CustomTextField(
+    modifier: Modifier = Modifier,
     value: String,
     onValueChange: (text: String) -> Unit,
     placeHolder: String
@@ -47,7 +48,7 @@ fun CustomTextField(
     val keyboardController = LocalSoftwareKeyboardController.current
 
     BasicTextField(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(Color.Transparent),
         value = value,

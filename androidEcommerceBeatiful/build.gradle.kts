@@ -9,7 +9,7 @@ plugins {
 
 //abaixo como fazer teste apenas para androidTest que e o instrument test
 tasks.register<JacocoReport>("jacocoCoverageVerification") {
-    dependsOn("createDebugCoverageReport")
+    dependsOn("connectedDebugAndroidTest") //esse e para o teste de iinstrumentacao
 
     reports {
         html.required.set(true)
@@ -26,6 +26,12 @@ tasks.register<JacocoReport>("jacocoCoverageVerification") {
             exclude("**/R\$*.class")
             exclude("**/BuildConfig.*")
             exclude("**/*\$Creator.*")
+            exclude(
+                "**/HomeScreen.kt.HomeScreenPreview*",
+                "**/*Preview*",
+                "**/*PreviewProvider*",
+                "**/*PreviewParameter*"
+            )
         }
     )
 
@@ -43,6 +49,10 @@ tasks.register<JacocoReport>("jacocoCoverageVerification") {
     )
 }
 
+
+tasks.withType<Test> {
+    finalizedBy(tasks.named("jacocoCoverageVerification"))
+}
 
 android {
     namespace = "com.ecommerce.beatiful.android"
@@ -116,9 +126,6 @@ dependencies {
     androidTestUtil(libs.test.orchestrator)
     implementation(libs.androidx.ui.test.junit4.android)
     debugImplementation(libs.test.manifest)
-
-    tasks.withType<Test> {
-        finalizedBy(tasks.named("jacocoCoverageVerification"))
-    }
-
+    implementation(libs.koin.test)
 }
+

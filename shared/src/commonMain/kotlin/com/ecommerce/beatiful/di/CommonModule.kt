@@ -13,24 +13,38 @@ import com.ecommerce.beatiful.data.local.contracts.AmazonProductByCategoryResour
 import com.ecommerce.beatiful.data.repository.AmazonProductByCategoryRepository
 import com.ecommerce.beatiful.data.repository.AmazonSearchProductRepository
 import com.ecommerce.beatiful.db.EcommerceDB
-import com.ecommerce.beatiful.viewModel.AmazonProductCategoryViewModel
-import com.ecommerce.beatiful.viewModel.AmazonSearchProductViewModel
+import com.ecommerce.beatiful.mocks.FakeAmazonProductCategoryResource
+import com.ecommerce.beatiful.mocks.FakeAmazonProductImplementation
+import com.ecommerce.beatiful.viewModel.HomeViewModel
 import org.koin.core.context.startKoin
 import org.koin.dsl.KoinAppDeclaration
+import org.koin.dsl.binds
 import org.koin.dsl.module
 
-fun initKoin(appDeclaration: KoinAppDeclaration) = startKoin {
+fun initKoin(appDeclaration: KoinAppDeclaration,isTesting: Boolean) = startKoin {
     appDeclaration()
-    modules(
-        clientModule,
+
+    //cliente e o modulo com os daados reais do backend
+    //isso tambem vale para o localResource
+    //por isso ambos nao sao comuns
+    //tambem se repaaraar estao implmeentado umaa interface que e abstracao para saber
+    //se e dado real ou falso
+    val commonModules = listOf(
         viewModelModule,
         repositoryModule,
-        localResourceModule,
         driverSQLModule,
-        coreDatabase
+        coreDatabase,
     )
-}
 
+    modules(
+        if (isTesting) {
+            commonModules  + testModule
+        }else {
+            commonModules + clientModule + localResourceModule
+        }
+    )
+
+}
 
 //https://github.com/hlnstepanova/kmpizza-repo/blob/main/shared/src/commonMain/kotlin/dev/tutorial/kmpizza/local/RecipeLocalSource.kt
 //nao esquecer o model Serializer
@@ -66,10 +80,23 @@ val repositoryModule = module {
 
 
 val viewModelModule = module {
-    single { AmazonSearchProductViewModel() }
-    single { AmazonProductCategoryViewModel()}
+    single { HomeViewModel() }
 }
 
-fun initKoin() = initKoin {
+private val testModule = module {
+    //precisa todos ser koinComponent
+    //preciso que os dados locais tenham a interface implementada
+    single<AmazonProduct> {
+        FakeAmazonProductImplementation()
+    } binds arrayOf(FakeAmazonProductImplementation::class, AmazonProductImplementation::class)
 
+    single<AmazonProductByCategoryResource> {
+        FakeAmazonProductCategoryResource()
+    } binds arrayOf(
+        FakeAmazonProductCategoryResource::class,
+        AmazonProductByCategoryResourceImplementation::class
+    ) //repositorio que consome o ResouceImplmentation tem que ter a intefce
+    // AmazonProductByCategoryResource no inject()
 }
+
+fun initKoin(isTesting: Boolean) = initKoin({},isTesting)

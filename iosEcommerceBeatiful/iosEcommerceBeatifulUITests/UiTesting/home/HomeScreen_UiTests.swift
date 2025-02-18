@@ -7,6 +7,7 @@
 //
 
 @testable import iosEcommerceBeatiful
+import shared
 import XCTest
 import SwiftUI
 
@@ -20,6 +21,7 @@ final class HomeScreen_UiTests: XCTestCase {
         continueAfterFailure  = false
         app.launchEnvironment = ["ENV": "TEST"]
         app.launch()
+       
     }
     
     

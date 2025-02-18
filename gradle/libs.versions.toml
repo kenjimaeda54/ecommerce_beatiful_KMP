@@ -30,6 +30,8 @@ test-orchestrator= "1.1.1"
 test-ext = "1.1.1"
 ui-test-junit4-android = "1.7.6"
 test-manifest = "1.0.0"
+kapt-android-test="2.48"
+hilt-android-testing= "2.44"
 
 
 [libraries]
@@ -70,6 +72,7 @@ test-orchestrator = {module = "androidx.test:orchestrator", version.ref  = "test
 test-ext = {module = "androidx.test.ext:junit", version.ref  = "test-ext"}
 androidx-ui-test-junit4-android = { module = "androidx.compose.ui:ui-test-junit4-android",  version.ref = "ui-test-junit4-android" }
 test-manifest = {module = "androidx.compose.ui:ui-test-manifest", version.ref  = "test-manifest"}
+
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

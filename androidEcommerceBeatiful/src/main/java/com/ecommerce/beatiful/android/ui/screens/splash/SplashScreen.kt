@@ -18,7 +18,6 @@ import com.ecommerce.beatiful.android.util.BottomScreens
 import com.ecommerce.beatiful.android.util.ComposableLifecycle
 import com.ecommerce.beatiful.android.util.StackScreens
 import com.ecommerce.beatiful.android.util.categoryMap
-import com.ecommerce.beatiful.viewModel.AmazonProductCategoryViewModel
 
 
 @Composable

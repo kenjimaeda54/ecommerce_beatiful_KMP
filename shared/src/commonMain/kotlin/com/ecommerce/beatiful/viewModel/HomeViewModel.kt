@@ -3,15 +3,29 @@ package com.ecommerce.beatiful.viewModel
 import com.ecommerce.beatiful.data.model.AmazonProductCategoryModel
 import com.ecommerce.beatiful.data.model.AmazonResultSerialization
 import com.ecommerce.beatiful.data.repository.AmazonProductByCategoryRepository
+import com.ecommerce.beatiful.data.repository.AmazonSearchProductRepository
 import com.ecommerce.beatiful.util.CoroutineViewModel
+import com.ecommerce.beatiful.util.DataOrException
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-class AmazonProductCategoryViewModel: CoroutineViewModel(), KoinComponent {
+class HomeViewModel: CoroutineViewModel(), KoinComponent {
+    private val amazonSearchProductRepository: AmazonSearchProductRepository by inject()
+    private var _amazonSearchProduct =
+        MutableStateFlow<DataOrException<List<AmazonResultSerialization>, String, Boolean>>(
+            DataOrException(null, null, false)
+        )
     private val repository: AmazonProductByCategoryRepository by inject()
     private val _listProductsCategory =
         MutableStateFlow<List<AmazonProductCategoryModel>>(
@@ -64,24 +78,41 @@ class AmazonProductCategoryViewModel: CoroutineViewModel(), KoinComponent {
                 differenceMinutes = differenceMinutes
             )
             if (response.data != null) {
-
-                _listProductsCategory.update {
-                    _listProductsCategory.value.map {
-                        if (it.id == categoryId) {
-                            it.copy(
-                                createAt = response.data!!.createAt,
-                                breadcrumbPath = response.data.breadcrumbPath,
-                                results = response.data.results
-                            )
-                        } else {
-                            it
-                        }
+                _listProductsCategory.value = _listProductsCategory.value.map {
+                    if (it.id == categoryId) {
+                        it.copy(
+                            createAt = response.data.createAt,
+                            breadcrumbPath = response.data.breadcrumbPath,
+                            results = response.data.results
+                        )
+                    } else {
+                        it
                     }
                 }
-
             }
-
         }
 
+    }
+
+    @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
+    fun fetchAmazonResult(product: StateFlow<String>, differenceMinutes: Int) {
+        scope.launch {
+            _amazonSearchProduct.value = DataOrException(null, null, true)
+            val flowDatOrExceptionAmazonResult = product.debounce(300).flatMapLatest { query ->
+                handleSearchProduct(query, 3)
+            }
+            _amazonSearchProduct.value = flowDatOrExceptionAmazonResult.first()
+        }
+
+    }
+
+    private fun handleSearchProduct(
+        query: String,
+        differenceMinutes: Int
+    ): Flow<DataOrException<List<AmazonResultSerialization>, String, Boolean>> {
+        return flow<DataOrException<List<AmazonResultSerialization>, String, Boolean>> {
+            val result = amazonSearchProductRepository.fetchAmazonResult(query, differenceMinutes)
+            emit(result)
+        }
     }
 }

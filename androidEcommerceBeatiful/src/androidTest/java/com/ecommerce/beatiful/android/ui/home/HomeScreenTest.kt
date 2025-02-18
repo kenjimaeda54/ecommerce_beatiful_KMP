@@ -1,23 +1,16 @@
 package com.ecommerce.beatiful.android.ui.home
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.test.assertAll
-import androidx.compose.ui.test.assertCountEquals
 import androidx.compose.ui.test.assertIsDisplayed
-import androidx.compose.ui.test.filterToOne
-import androidx.compose.ui.test.hasParent
+import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.hasTestTag
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
-import androidx.compose.ui.test.onAllNodesWithTag
-import androidx.compose.ui.test.onChildren
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performScrollToNode
-import androidx.compose.ui.test.printToLog
+import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.ecommerce.beatiful.android.ui.screens.home.BACKPACK_ICON
 import com.ecommerce.beatiful.android.ui.screens.home.CLEAN_ICON
@@ -26,41 +19,71 @@ import com.ecommerce.beatiful.android.ui.screens.home.HomeScreen
 import com.ecommerce.beatiful.android.ui.screens.home.VIDEO_GAMES_ICON
 import com.ecommerce.beatiful.android.util.TestTags
 import com.ecommerce.beatiful.android.util.categoryMap
-import org.junit.Before
+import com.ecommerce.beatiful.mocks.FakeAmazonProductImplementation
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.koin.test.KoinTest
+import org.koin.test.inject
 
 @RunWith(AndroidJUnit4::class)
-class HomeScreenTest {
+class HomeScreenTest : KoinTest {
 
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    @Before
+    private val fakeAmazonProduct: FakeAmazonProductImplementation by inject()
+
+    /*@Before
+    poderia fazer globaal porem tenho if na minha arvore
     fun setup() {
+    composeTestRule.setContent {
+        HomeScreen()
+    }
+    }*/
+
+    @Test
+    fun should_populate_data_properly_products() {
+
         composeTestRule.setContent {
             HomeScreen()
         }
-    }
 
-    @Test
-    fun should_populate_data_properly() {
         //querer impremir os testes
         //composeTestRule.onNodeWithTag(TestTags.LazyColumnHomeScreen.name).printToLog(TestTags.LazyColumnHomeScreen.name)
 
-        categoryMap.entries.forEachIndexed { index, _ ->
-            //por ser uma lista e ter mais mochilas so uso o assertExists
-            val id = categoryMap.keys.toList()[index]
-            composeTestRule.onNodeWithTag(TestTags.LazyColumnHomeScreen.name)
-                .performScrollToNode(hasText(categoryMap[id] ?: ""))
-                .assertExists()
-        }
+        //por ser uma lista e ter mais mochilas so uso o assertExists
+
+
+        composeTestRule.onNode(hasTestTag(TestTags.LazyColumnHomeScreen.name))
+            .performScrollToNode(hasText("Mochilas"))
+            .assertExists()
+
+        composeTestRule.onNode(hasTestTag(TestTags.LazyColumnHomeScreen.name))
+            .performScrollToNode(hasText("Limpeza"))
+            .assertExists()
+
+        composeTestRule.onNode(hasTestTag(TestTags.LazyColumnHomeScreen.name))
+            .performScrollToNode(hasText("Video Games"))
+            .assertExists()
+
+        composeTestRule.onNode(hasTestTag(TestTags.LazyColumnHomeScreen.name))
+            .performScrollToNode(hasText("Eletronicos"))
+            .assertExists()
+
+        composeTestRule.onNode(hasTestTag(TestTags.LazyColumnHomeScreen.name))
+            .performScrollToNode(hasText("Saude / Limpeza"))
+            .assertExists()
     }
 
 
     @Test
     fun should_scroll_to_correct_section_when_category_clicked() {
+
+        composeTestRule.setContent {
+            HomeScreen()
+        }
+
         categoryMap.forEach { (_, category) ->
             composeTestRule.onNodeWithTag(
                 "${TestTags.CategoryButtonsRow.name}_$category"
@@ -77,20 +100,57 @@ class HomeScreenTest {
         }
     }
 
+    @Test
+    fun when_product_results_is_empty_should_not_render_items_categories() {
+        //para funcinar corretamente o if preciso renderizaar a tela novamente
+        //apos definir ffalos
+        fakeAmazonProduct.setReturnDataWithProductsEmpty(true)
+
+        composeTestRule.setContent {
+            HomeScreen()
+        }
+
+        composeTestRule.waitForIdle()
+
+
+        composeTestRule
+            .onNodeWithTag(TestTags.RowItemsProducts.name)
+            .assertDoesNotExist()
+
+
+    }
 
     @Test
-    fun should_populate_correct_icons_categories() {
+    fun whenTypeSearchInput_shouldUpdateText() {
 
-        //nao estava encontrando dai adicinei no pai uma tag
-        categoryMap.entries.forEachIndexed { index, _ ->
-            val id = categoryMap.keys.toList()[index]
-            composeTestRule.onNode(
-                hasText(
-                    categoryMap[id] ?: ""
-                ) and hasParent(hasTestTag(TestTags.CategoryButtonsRow.name))
-            )
-                .assertExists()
-                .assertIsDisplayed()
+        composeTestRule.setContent {
+            HomeScreen()
+        }
+
+        val testText = "Mochila"
+
+        composeTestRule.onNodeWithTag(TestTags.SearchInput.name)
+            .performTextInput(testText)
+
+        composeTestRule.onNodeWithTag(TestTags.SearchInput.name)
+            .assertTextEquals(testText)
+
+    }
+
+
+    @Test
+    fun should_populate_correct_icons_and_title_categories() {
+
+        composeTestRule.setContent {
+            HomeScreen()
+        }
+
+        // composeTestRule.onNodeWithTag(TestTags.CategoryButtonsRow.name).printToLog(TestTags.CategoryButtonsRow.name)
+
+        categoryMap.entries.forEach { (index, value) ->
+            composeTestRule.onNodeWithTag("${TestTags.CategoryButtonsRow.name}_${value}")
+                .assertTextEquals(value)
+
         }
 
         composeTestRule.onNodeWithContentDescription(BACKPACK_ICON)
@@ -112,18 +172,36 @@ class HomeScreenTest {
 
     @Test
     fun should_populate_correct_items_products() {
-        composeTestRule.onNodeWithTag(TestTags.RowItemsProducts.name)
-            .performScrollToNode(hasText("Mochila linda para estudos")).assertIsDisplayed()
+        fakeAmazonProduct.setReturnDataWithProductsEmpty(false)
 
+        composeTestRule.setContent {
+            HomeScreen()
+        }
 
-        composeTestRule.onNodeWithTag(TestTags.RowItemsProducts.name)
-            .performScrollToNode(hasText("R$ 150.34")).assertIsDisplayed()
+        //esperando aa UI carrear
+        composeTestRule.waitForIdle()
 
-        composeTestRule.onNodeWithTag(TestTags.ImageRowCategoryItems.name)
-            .assertExists().assertIsDisplayed()
+        composeTestRule.onNodeWithTag(TestTags.LazyColumnHomeScreen.name)
+            .performScrollToNode(hasText("Mochilas"))
+
+        //apos realizar o scroll agguardar a UI carreggar
+        composeTestRule.waitForIdle()
+
+        composeTestRule
+            .onNodeWithText("Mochila linda para estudos")
+            .assertExists()
+            .assertIsDisplayed()
+
+        composeTestRule
+            .onNodeWithText("R$ 150.34")
+            .assertExists()
+            .assertIsDisplayed()
+
+        composeTestRule
+            .onNodeWithTag(TestTags.ImageRowCategoryItems.name)
+            .assertExists()
+            .assertIsDisplayed()
 
 
     }
-
-
 }
